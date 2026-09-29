@@ -1,23 +1,23 @@
 # Case Studies - Answers
 
-Analysis of the case studies of the KubeVirt user guide. Because case studies, blogs, talks, and adopter logos live on the main `kubevirt.io` website rather than in the user guide itself, the answers below evaluate the project website that the user guide is part of, and note where the user guide does or does not connect to that content.
-
 - Are there case studies available for the project and are they documented on the website?
 
-    Not clearly. The `kubevirt.io` website presents extensive adopter logo walls (End Users, Vendors, and Integrations) that serve as social proof, but it does not appear to publish dedicated, narrative case studies describing how specific organizations adopted and benefited from KubeVirt. The user guide itself contains only technical documentation and does not link to any case studies.
+  Partially. Two CNCF-published end-user case studies feature KubeVirt: NTT Docomo Business and Swisscom, both at `cncf.io/case-studies`. Neither the `kubevirt.io` website nor the user guide links to them, so a visitor to either property has no way to discover them. The `kubevirt.io` landing page and the `ADOPTERS.md` file in the `kubevirt/kubevirt` repository also invite contributors to submit "blog posts, case studies, or labs", and the user guide's `contributing.md` repeats that invitation, but the website has no case-study section or category and no blog post is tagged or titled as a case study.
+
+  The closest thing to project-hosted case studies is the `ADOPTERS.md` table, which lists roughly 44 organizations across three types (End-user, Integration, Vendor) with a "Since" year and a one- to three-sentence "Use-Case" column. Several entries, such as Cloudflare, CoreWeave, NVIDIA, SK Telecom, and S3NS, describe concrete production uses. This text is only in the GitHub repository; the website reads the same organizations from `_data/adopters.yml` but renders only logos and links, dropping the use-case descriptions.
 
 - Are there user testimonials available?
 
-    Not evident. The website lists adopting organizations by logo, but there are no quoted testimonials from users describing their experience or outcomes. The user guide does not include or reference testimonials.
+  No, not in the form of attributed quotes on the website. The "Use-Case" statements in `ADOPTERS.md` are written by the adopters in the first person ("We use KubeVirt as part of our ...") and function as informal testimonials, but they are not surfaced on `kubevirt.io` or in the user guide. The website's Interviews video playlist contains community and contributor interviews rather than customer testimonials.
 
 - Is there an active project blog?
 
-    Yes. The `kubevirt.io` site maintains an active blog with regular posts; recent entries are dated 2026 (for example, "Beta Features Enabled by Default in KubeVirt v1.9" and "Announcing the release of KubeVirt v1.8"), covering releases, features, and technical topics. The blog lives on the main site; the user guide links to release notes but does not link directly to the blog.
+  Yes, at `kubevirt.io/blogs`, with about 106 posts plus 24 "This Week in KubeVirt" digests and a set of release announcements. Cadence has slowed markedly: 24 to 25 posts per year in 2018 and 2019, 20 in 2020, 6 to 8 per year from 2021 to 2023, 2 in 2024, 6 in 2025, and 3 so far in 2026 (most recently September 2026). Recent posts are substantive (the v1.8 release, beta features on by default in v1.9, a security audit announcement, cross-cluster live migration networking). Categorization is thin: 92 posts are in the `news` category, 12 in `uncategorized`, and tags are used inconsistently, so there is no way to filter for adoption or user-story content.
 
 - Are there community talks for the project and are they present on the website?
 
-    Yes. The `kubevirt.io/videos/` page organizes community talks into curated YouTube playlists, including Talks, Demos, Interviews, and the annual KubeVirt Summit, alongside recorded community meetings. This content is well organized on the main site, but the user guide does not surface or link to it.
+  Yes. The `kubevirt.io/videos` section has pages for Talks, Demos, Interviews, KubeVirt Summit, and Weekly Meetings, each embedding a curated YouTube playlist. The Summit page links per-year playlists for five past editions and advertises the sixth annual KubeVirt Summit in October 2026 with its CfP dates. The Talks page also points to the community Events wiki for upcoming CfPs and conference sessions. The user guide's `contributing.md` links only to the New Contributor session recording; nothing in the user guide points to the talks, demos, or Summit content.
 
 - Is there a logo wall of users/participating organizations?
 
-    Yes. The website homepage features a prominent logo wall grouped into End Users (such as Arm, Aussie Broadband, Bytedance, Cloudflare, CoreWeave, and NVIDIA), Vendors (such as Alauda, Deckhouse, Microsoft, Oracle, Red Hat, and SUSE), and Integrations (such as Portworx and Trilio). The user guide does not display or link to this logo wall.
+  Yes. The `kubevirt.io` landing page renders three logo walls ("End Users", "Vendors", and "Integrations") from `_data/adopters.yml`, which is generated by `adopters.py` and kept in sync with `ADOPTERS.md` through a documented two-step PR process. Each logo links to the organization's site and shows the name in a tooltip. The wall shows who uses KubeVirt but not how or why, because the use-case text is not carried over. The user guide does not display or link to the logo wall.

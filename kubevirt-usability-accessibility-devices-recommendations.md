@@ -1,10 +1,12 @@
-# Usability Accessibility and Devices - Recommendations
+# KubeVirt usability, accessibility, and devices: recommendations
 
-The following recommendations address the usability, accessibility, and devices support of the KubeVirt user guide.
+The following recommendations address the usability, accessibility, and devices of the KubeVirt user guide.
 
-- Increase color contrast for the brand teal primary color (`#0db2b6` in `docs/stylesheets/extra.css`) so that white header text meets the WCAG AA contrast ratio of at least 4.5:1 for normal text, either by darkening the teal or by adjusting the text color placed on it.
-- Adjust the body link color (currently the primary color darkened with `filter: brightness(80%)`) so that links reach at least 4.5:1 contrast against the page background, rather than the roughly 3.96:1 they achieve today.
-- Verify all contrast changes in both the light (`default`) and dark (`slate`) schemes, checking header text, links, navigation section labels, and code blocks.
-- Add a-ln automated accessibility and contrast check to the site build (for example, a Lighthouse or axe-based check) so contrast regressions are caught before publishing.
-- Continue requiring descriptive, non-empty alt text on all images and maintain correct heading order in new pages, so screen-reader and text-to-speech users keep getting a good experience.
-- Preserve the existing strengths, keeping the responsive viewport, mobile drawer navigation, site search, in-page table of contents, skip-to-content link, and ARIA labels intact as the theme is upgraded.
+- Fix the header and link contrast in `docs/stylesheets/extra.css`. Darken `--md-primary-fg-color` to a teal that gives at least 4.5:1 against white (for example `#007a7e` or darker), or keep the brand teal for decorative elements only and set the header and tab text to a dark foreground. Check links against the same 4.5:1 target and remove the `filter: brightness(80%)` hack in favor of an explicit color. Verify both light and dark schemes with a contrast checker.
+- Replace the ASCII stack diagram on the Architecture page with an image that has descriptive alt text or, better, a Mermaid diagram (enable `pymdownx.superfences` custom fences for `mermaid` in `mkdocs.yml`) accompanied by a one-paragraph prose description of the layers, so screen reader users and mobile readers get the same information.
+- Convert `$`-prefixed indented code blocks to fenced blocks with a language tag and no prompt, and separate output into its own block. Start with the pages on the new-user path (Installation, Lifecycle, `virtctl`) and the longest reference pages (Disks and Volumes, Export API). This helps screen readers, copy-paste, and mobile scrolling at once.
+- Enable `content.code.copy` in `theme.features` so long commands can be copied without horizontal scrolling, and break commands over 100 characters across lines with `\` continuations in the source.
+- Verify on a phone that tables on the Arm64 feature-gate and device status pages scroll horizontally rather than overflowing the page; if they overflow, remove the `display: table; width: max-content` override from `extra.css` or scope it to specific tables with `attr_list` classes.
+- Split or restructure pages over about 500 lines. Candidates are Disks and Volumes (split by volume type), Interfaces and Networks (split binding methods from network attachment), and Live Migration (move migration strategies and network configuration to sub-pages). Split Release Notes into one page per minor release or paginate it, and set the Release Notes tab to open the newest release.
+- Set the logo alt text to "KubeVirt" by adding `extra.homepage` or a custom `partials/logo.html` override, and add a short caption or introductory sentence above each wide status table stating what the table shows.
+- Add an accessibility check to the Makefile and Prow presubmit, for example running `pa11y-ci` or Lighthouse against the built site for a sample of pages, so contrast regressions are caught in pull requests.

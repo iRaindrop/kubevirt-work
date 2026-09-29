@@ -1,11 +1,23 @@
-# Beginner Friendly Issue Backlog - Comment
+# KubeVirt beginner friendly issue backlog: comment
 
-The KubeVirt user guide has the building blocks of a healthy beginner-friendly issue backlog, but the pieces are not consistently applied. A dedicated `good-first-issue` label exists and has been used on two dozen issues over time, and the contributing page clearly tells newcomers to look for it. Issues are generally well written: bug reports and feature requests follow templates with description, expectation, and URL fields, so most issues give a contributor enough context to start work rather than just a title. Staleness is handled automatically through the shared Prow lifecycle bot, which moves inactive issues through `lifecycle/stale` and `lifecycle/rotten` before closing them.
+The KubeVirt user guide has the infrastructure for a beginner-friendly backlog but not the backlog itself. The repository inherits the KubeVirt organization's Prow labels, issue templates, and lifecycle automation; the labels a newcomer needs (`good-first-issue`, `help wanted`, `sig/documentation`, `triage/accepted`) all exist; and the Contributing page points newcomers at `good-first-issue` in this and two sibling repositories. When maintainers have written beginner issues, they have written them well: the September 2025 batch of eight feature-lifecycle documentation issues each carried background, affected files, and acceptance criteria.
 
-The main gap is that the beginner backlog is effectively empty and the currently open issues are under-triaged. At the time of review there were no open `good-first-issue` items in either the user-guide or the core repository, so a new contributor who follows the documentation's advice finds nothing to pick up. Of the small number of open documentation issues, most carried no labels at all — no `kind/*`, no `sig/documentation`, and no `triage/accepted` — which means the backlog is not being actively categorized even though the label taxonomy is available.
+The problem is follow-through. All ten `good-first-issue` items closed in the past year, including that entire batch, were auto-closed by the stale bot without a fix, and today the label has zero open items here and zero documentation-related items in kubevirt/kubevirt. A newcomer who follows the Contributing page's instructions finds nothing to do. Triage labels are applied to only half of the small open backlog, and no issue is assigned or marked `triage/accepted`, so the lifecycle automation runs without a human deciding which issues should survive it. The net effect is a clean but empty backlog, which is the wrong outcome for a project that explicitly invites first-time contributors to start with documentation.
 
-A specific, fixable inconsistency is the presence of two near-duplicate labels: the hyphenated `good-first-issue` that the team actually applies and the standard spaced `good first issue` that sits unused. GitHub's native "Contribute" experience and the good-first-issues discovery tooling key off the standard spaced label, so the project's real beginner issues are invisible to those channels. Consolidating on the standard label (or aliasing consistently) would immediately widen discovery.
+Strengths:
 
-Finally, the aggressive auto-close behavior deserves attention. Because inactive issues — including valid enhancements — are closed as `lifecycle/rotten` rather than triaged or frozen, the backlog stays small in part by discarding work rather than curating it. A light triage pass that accepts, labels, and where appropriate freezes beginner-suitable issues would turn the existing automation and labels into a genuinely inviting on-ramp for new contributors.
+- Full Prow label taxonomy, org-level issue templates, and automated lifecycle management are in place.
+- Open issues are substantive, with structured bodies and clear problem statements.
+- The retired `good-first-issue` batch (#918 to #925) is a model for how to write scoped, self-contained documentation tasks.
+- Issue volume (twelve per year) is small enough to triage completely.
+- The Contributing page tells newcomers which label to look for and in which repositories.
 
-Rating: 3 - Meets standards
+Weaknesses:
+
+- Zero open `good-first-issue` items in kubevirt/user-guide and zero documentation-labeled beginner issues in kubevirt/kubevirt.
+- Every beginner issue closed in the past year was auto-closed as rotten rather than fixed.
+- Half of open issues are unlabeled; none carries `triage/*`, `sig/*`, or an assignee.
+- No process exempts valid, unworked beginner issues from the stale bot.
+- A proposal for Simplified Chinese documentation and a theme end-of-life report have no recorded triage decision.
+
+Rating: 2 - Needs improvement

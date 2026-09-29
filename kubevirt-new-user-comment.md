@@ -1,9 +1,26 @@
 # New User Content - Comment
 
-The KubeVirt user guide gives new users a solid technical starting point, but its on-ramp is fragmented across several differently named locations. New-user material is split between a top-level "Quickstarts" entry, an "Installation" page buried as the first item under "Cluster Administration," and "Try it out" and "KubeVirt Labs" sections on the homepage. Because none of these is labeled "Getting Started" or "First Steps," newcomers must piece the path together themselves. Consolidating these entry points under a single, clearly named "Getting Started" section—ideally as its own top-level navigation item—would match the convention new users expect and provide one obvious front door. The Falco getting-started guide (https://falco.org/docs/getting-started/) is a good model for this unified structure.
+The KubeVirt user guide has the ingredients of good new-user content but does not assemble them into a path. Installation is accurate, the four-command operator install works on x86_64 and Arm64, and the Welcome page points to live Killercoda scenarios, minikube and kind quickstarts, and four hands-on labs. Where pages have been recently revised, such as Creating VirtualMachines by using virtctl and Accessing Virtual Machines, the examples are clean fenced blocks a reader can paste. Compared with the Falco getting-started documentation that the CNCF criteria cite as a good example, KubeVirt has equivalent installation depth but lacks Falco's single labeled entry point, per-platform install tabs, and explicit "next steps" hand-off.
 
-The installation documentation itself is strong: it lists prerequisites, provides ordered and copy-pasteable operator and CR commands, shows how to verify a healthy deployment, and covers multiple platforms (Kubernetes, OKD, k3OS) and architectures (x86_64 and Arm64). The main weakness is that the guide leans heavily on external links—Killercoda, the minikube/kind/cloud quickstarts, and the kubevirt.io labs—rather than an in-guide walkthrough that carries a reader from a fresh cluster to a running virtual machine. Bringing at least one complete, end-to-end "deploy KubeVirt and launch your first VM" tutorial into the guide would reduce reliance on off-site content and give users a self-contained first success.
+The central weakness is that the guide outsources the first-run experience. Quickstarts is a bare link list, Installation is a cluster administrator's reference that buries the core procedure under compatibility notes and legacy distributions and ends without a next step, and the pages a new user needs afterward (`virtctl`, create, access) sit in a different section with no cross-links from Installation or Basic Use. The oldest pages in that chain, Basic Use and Lifecycle, reference a `vmi.yaml` that is never shown, so the first commands a reader encounters cannot be run. Client platform coverage for `virtctl` stops at Linux amd64.
 
-The most actionable single improvement is to close the gap between installation and first use. The installation page currently ends with optional topics (network plugins, node placement) and offers no explicit "Next steps" pointer toward the first-VM tasks in "User Workloads" (such as `basic_use.md` and `creating_vms.md`). Adding a clear "Next steps" call-to-action at the end of installation, linking directly to creating and accessing a first virtual machine, would give new users an unbroken path from setup to a working workload.
+Copy-paste quality is uneven and tracks page age: newer pages use fenced blocks, older ones use `$`-prefixed indented blocks mixed with output, and the theme's copy button is not enabled. These are low-effort fixes with a high payoff for new users.
+
+Strengths:
+
+- Installation gives a correct, short operator-based procedure with expected output and a software-emulation fallback.
+- The Welcome page links to live Killercoda scenarios, quickstarts for minikube, kind, and cloud providers, and four hands-on labs.
+- Arm64 platform status is documented in a dedicated sub-section.
+- Recently revised pages provide clean, pasteable manifests and `virtctl` pipelines.
+- Requirements are stated up front, including `--allow-privileged=true` and hardware virtualization validation.
+
+Weaknesses:
+
+- No page labeled "Getting started" and no single in-guide path from install to first running VM.
+- Installation mixes the core procedure with AppArmor, kernel compatibility, OKD, k3OS, developer builds, and node placement, and ends without a next step.
+- `virtctl` install covers only Linux amd64 via `wget`; macOS, Windows, and arm64 binaries and `PATH` setup are not mentioned.
+- Basic Use and Lifecycle reference `vmi.yaml` without providing it and do not link onward.
+- Older pages use `$`-prefixed indented code blocks interleaved with output, and the copy button is not enabled.
+- The Quickstarts page has no introduction, prerequisites, or outcome statement.
 
 Rating: 3 - Meets standards

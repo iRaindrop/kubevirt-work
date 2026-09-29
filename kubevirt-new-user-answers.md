@@ -1,25 +1,35 @@
-# KubeVirt User Guide: New User Content Answers
+# KubeVirt new user content: answers
 
-- Is "getting started" clearly labeled? ("Getting started", "Installation", "First steps", etc.)
+- Is "Getting started" clearly labeled? (e.g "Getting started", "Installation", "First steps", etc.)
 
-    Partially. There is no page or navigation entry titled "Getting Started" or "First steps." New-user entry points are instead spread across a top-level "Quickstarts" item, an "Installation" page (the first page under Cluster Administration), and a "Try it out" section on the homepage. "Installation" is clearly labeled, but the absence of a single, consistently named getting-started landing page makes the on-ramp harder to find than a conventional "Getting Started" label would.
+    Partially. The main navigation has a "Quickstarts" tab and the Cluster Administration section opens with "Installation", so both labels a new user would scan for are present. There is no page titled "Getting started" or "First steps", and the Welcome page describes Quickstarts as "a list of resources to help you learn KubeVirt basics" rather than as the place to begin.
+
+    The Quickstarts page itself is a list of four external links (Killercoda, minikube, kind, cloud providers) with no introduction, prerequisites, or statement of what a reader will have accomplished at the end. The `virtctl` page, which a new user needs immediately after installation, is titled "Download and Install the virtctl Command Line Interface" and sits sixth in the User Workloads section rather than next to Installation.
 
 - Is installation documented step-by-step?
 
-    Yes. `cluster_admin/installation.md` lists prerequisites and then provides copy-pasteable, ordered commands to deploy the KubeVirt operator, create the KubeVirt CR, wait for the components to become available, and verify the running pods. It also covers optional steps such as software emulation fallback and node-placement restrictions.
+    Yes. The Installation page lists requirements (a supported Kubernetes version, `--allow-privileged=true`, `kubectl`), explains how to validate hardware virtualization with `virt-host-validate`, and gives a four-command sequence that fetches the latest release tag, applies the operator manifest, applies the KubeVirt custom resource, and waits for the `Available` condition. It then shows the expected `kubectl get pods -n kubevirt` output and explains how to enable software emulation when KVM is unavailable.
 
-- If needed, are multiple OSes documented?
+    The page is long and mixes the core procedure with content a first-time user does not need: AppArmor integration, host kernel and userland compatibility, SELinux, OKD Service Catalog, k3OS, daily developer builds, deploying from source, network plugin installation, and node placement. The core install commands appear roughly 130 lines into the page. Notes about behavior "prior to release v0.20.0" and "prior to KubeVirt 0.34.2" remain in the main flow. The page ends with node-placement patches and does not tell the reader what to do next.
 
-    Partially. Because KubeVirt is a Kubernetes add-on, the installation guide documents multiple Kubernetes platforms (Kubernetes, OKD, k3OS) and both the x86_64 and Arm64 architectures, rather than host operating systems. Host-OS-specific concerns are limited to AppArmor and SELinux notes. Separately, guest operating systems (for example Windows and Linux) are documented under User Workloads. There is no per-Linux-distribution installation walkthrough, which is reasonable for a cluster add-on but worth noting.
+- If needed, is guidance provided for multiple operating systems and platforms?
+
+    Partially. Installation states that the operator supports x86_64 and Arm64, and a dedicated "ARM cluster" sub-section documents Arm64 feature-gate status, device status, unsupported operations, and VM specifics. Container runtime, AppArmor, and SELinux considerations are covered for Linux hosts. Kubernetes distribution coverage includes generic Kubernetes, OKD, and k3OS, with minikube, kind, and cloud providers delegated to external quickstarts.
+
+    Client-side platform guidance is missing. The `virtctl` page shows only a `wget` for `virtctl-${VERSION}-linux-amd64` and does not mention the macOS, Windows, or arm64 binaries that the release page publishes, nor how to make the binary executable and place it on the `PATH`. Guest operating systems are covered for Windows (virtio drivers, legacy Windows) but there is no equivalent "your first Linux guest" page; Linux examples rely on containerDisk images referenced in scattered manifests.
 
 - Do users know where to go after reading the getting started guide?
 
-    Partially. The installation page ends with optional topics (network plugins, node placement) rather than an explicit "Next steps" pointer to creating a first virtual machine. Users must navigate on their own to "User Workloads" (for example `basic_use.md` or `creating_vms.md`). Adding a clear "Next steps" link from installation to the first-VM tasks would close this gap.
+    No. Installation ends without a next-step link. The Quickstarts page has no "what next" section. Basic Use tells the reader that "the following pages describe how to use and discover the API, manage, and access virtual machines" but does not link to any of them. The Welcome page lists the sections but does not suggest a reading order. A new user who finishes installing has to infer that User Workloads is the next section and that Creating VirtualMachines by using virtctl and Accessing Virtual Machines are the relevant pages.
 
-- Is your new user content clearly signposted on your site's homepage or at the top of your information architecture?
+- Is your new user content clearly discoverable, such as on the documentation home page?
 
-    Yes. The homepage lists all major sections and includes prominent "Try it out," "KubeVirt Labs," and "Getting help" sections, and "Quickstarts" appears near the top of the navigation. However, much of this new-user content relies on external links (Killercoda, minikube/kind/cloud quickstarts, and the kubevirt.io labs) rather than in-guide getting-started material, so the signposting leads users off-site fairly quickly.
+    Yes, with caveats. The Welcome page has a "Try it out" section linking to Killercoda and the quickstarts and a "KubeVirt Labs" section linking to four hands-on labs on kubevirt.io. Quickstarts is the third item in the top navigation. Both the quickstarts and the labs resolve and are current.
 
-- Is there sample code or other example content that can easily be copy-pasted?
+    The discoverable new-user content is almost entirely external to the user guide. Within the guide, the reader must open Cluster Administration to find Installation and User Workloads to find `virtctl`, creation, and access. The Welcome page hides its own navigation sidebar, so the section descriptions and the "Try it out" links are the only cues.
 
-    Yes. The documentation makes extensive use of fenced and indented code blocks with ready-to-run examples, including installation shell commands, `virtctl create vm` invocations, `kubectl` lifecycle commands, and YAML manifests. These are formatted for direct copy-paste.
+- Is there sample code or content that can easily be copy-pasted?
+
+    Yes, with friction. Nearly every page includes manifests and commands. Recently written pages such as Creating VirtualMachines by using virtctl, Accessing Virtual Machines, and VirtualMachine Templates use fenced `shell` or `yaml` blocks without prompt characters. Instance type and preference examples and the `virtctl create vm` pipelines can be pasted directly.
+
+    Older pages, including Installation, Lifecycle, `virtctl`, Disks and Volumes, and Export API, use indented code blocks prefixed with `$ `, which paste as invalid commands and are interleaved with example output. The mkdocs-material `content.code.copy` feature is not enabled in `mkdocs.yml`, so there is no copy button on code blocks. Basic Use and Lifecycle reference `vmi.yaml` without supplying the manifest, so the first commands a new user meets cannot be run as written.

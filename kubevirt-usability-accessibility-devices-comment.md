@@ -1,11 +1,24 @@
-# Usability Accessibility and Devices - Comment
+# KubeVirt usability, accessibility, and devices: comment
 
-The KubeVirt user guide is highly usable and, for the most part, accessible, thanks to its Material for MkDocs foundation. The site is responsive and works well on mobile: it sets a proper viewport, collapses the top navigation into a mobile drawer, and keeps site search and the in-page table of contents reachable on small screens. Pages are readable, with clean typography, clear heading structure, and syntax-highlighted code, so readers can move through technical content comfortably on any device.
+The KubeVirt user guide inherits a solid usability and accessibility baseline from mkdocs-material. The site is responsive, the navigation, search, and table of contents all work from a mobile drawer, keyboard users get a skip link, search shortcuts, and standard focusable controls, and pages declare a language and use a proper heading hierarchy. The project has customized the theme lightly and, apart from color, has not undermined these defaults. Dark mode is available and previous and next links help linear reading.
 
-Accessibility support is strong at the structural level. The document declares its language, exposes semantic landmarks and descriptive ARIA labels (Header, Navigation, Search, Table of contents, Tabs), and provides a "Skip to content" link, all of which help keyboard and screen-reader users. Keyboard-only operation is well supported through the theme's navigation and search shortcuts. Text-to-speech users are also well served: every image in the documentation carries non-empty alt text, and there are no raw image tags missing an `alt` attribute.
+The one clear defect is color contrast. The custom teal primary color produces white-on-teal header and tab text at roughly 2.6:1 and body links at roughly 4:1, both below WCAG AA for normal text. This affects every page and is a one-line CSS change to fix. The remaining issues are in content rather than the platform: the Architecture page's central diagram is ASCII art with no textual equivalent, older pages use `$`-prefixed indented code blocks that read poorly on screen readers and scroll horizontally on phones, several pages exceed 500 lines without internal grouping, and wide status tables and long command lines depend on horizontal scrolling on small screens. The `width: max-content` table override in `extra.css` should be verified on a real device to confirm tables still scroll rather than overflow the viewport.
 
-The clear weak point is color contrast. The brand teal used as the primary color (`#0db2b6` in `docs/stylesheets/extra.css`) yields only about 2.6:1 against the white header text, which fails the WCAG AA requirement of 4.5:1 for normal text and even the 3:1 threshold for large text. Body links, darkened with `filter: brightness(80%)`, reach roughly 3.96:1 but still fall short of 4.5:1. This affects color-impaired and low-vision readers most, and it is the single most impactful fix in this area.
+Strengths:
 
-Addressing contrast would be straightforward and high value: darken the primary teal (or the text placed on it) until header text and links meet WCAG AA, and verify the result in both the light and dark schemes. To sustain accessibility over time, maintainers could add an automated contrast and accessibility check to the build and keep encouraging descriptive alt text and correct heading order in new pages.
+- Responsive mkdocs-material theme with viewport meta, mobile drawer navigation, full-screen search, and in-drawer table of contents.
+- Skip-to-content link, search keyboard shortcuts, and ARIA-labeled controls out of the box.
+- `lang="en"`, single `h1`, and consistent heading hierarchy on pages.
+- Light and dark schemes with a toggle; active tabs underlined as well as colored.
+- Descriptive alt text on the Windows driver screenshots.
 
-Rating: 4 - Meets or exceeds standards
+Weaknesses:
+
+- Header and tab text on the custom teal primary color fails WCAG AA (about 2.6:1); body links are borderline (about 4:1).
+- The Architecture stack diagram is ASCII art with no text alternative.
+- Older pages use `$`-prefixed indented code blocks mixed with output.
+- Very long pages (Disks and Volumes, Interfaces and Networks, Live Migration, Release Notes) with no internal grouping.
+- Wide tables and 500-plus long code lines require horizontal scrolling on mobile; the `max-content` table override needs device verification.
+- Logo alt text is "logo" rather than the project name; no code copy button.
+
+Rating: 3 - Meets standards

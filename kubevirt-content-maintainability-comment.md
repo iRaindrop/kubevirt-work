@@ -1,9 +1,25 @@
-# Content Maintainability - Comment
+# KubeVirt content maintainability: comment
 
-The KubeVirt user guide is built on a maintainable foundation. It uses MkDocs with the `mkdocs-material` theme, keeps all content as Markdown under `docs/`, and enforces ordering explicitly through per-directory `.nav.yml` files rather than relying on alphabetical sorting. Search is enabled out of the box via the `search` plugin, and the contribution workflow is well documented: the README describes forking, signing commits, and local validation through `make` targets that check spelling (yaspeller) and links (HTMLProofer). Page moves are handled gracefully through an extensive `redirects` map in `mkdocs.yml`, which preserves old URLs and reduces link rot. These are strong maintainability practices.
+The KubeVirt user guide is maintainable as a single-version, single-language site. Its toolchain is simple and well suited to a documentation-only repository: plain Markdown under `docs/`, mkdocs-material with built-in search, explicit `.nav.yml` ordering, centralized redirects, and a Makefile that runs spelling and link checks in a container. The redirects map shows the maintainers preserved URLs through a major reorganization, which is the kind of discipline that keeps a site maintainable over time.
 
-The most significant gap is content versioning. The site publishes a single "latest" build from the `main` branch, with no versioning tooling such as `mike` and no version selector in the theme. Because KubeVirt's API and features evolve across releases, readers on an older KubeVirt version have no way to view documentation matching their deployment, and maintainers cannot preserve historical snapshots. Adopting `mike` (the standard versioning tool for MkDocs Material) and surfacing a version dropdown would let the project align documentation with product releases and is the highest-impact maintainability improvement to pursue. Kubernetes (https://kubernetes.io/docs/) is a good model of versioned CNCF documentation.
+The gap is that the project has outgrown the single-version model without documenting the alternative. KubeVirt ships minor releases with feature-gate graduations and API changes, and the repository already has per-release branches, yet the published site tracks only `main`, offers no version selector, and no document explains what the release branches are for or how contributors should use them. Users of an older KubeVirt cannot tell which features on a page apply to them except where an individual author added an "as of vX.Y" banner. Compared with the Kubernetes documentation that the CNCF criteria cite as a good example, which publishes each supported minor version with a selector and documents its branching and localization processes, KubeVirt's approach is informal and depends on maintainer memory.
 
-Localization is a secondary consideration. There is currently no internationalization framework, no per-language directory structure (for example `en/` or `zh/`), and no documented plans for translation. While localization may not be an immediate priority, the current flat, topic-based layout would require restructuring to support it later. If translation is a future goal, the project should decide early on a directory convention and evaluate an i18n plugin (such as `mkdocs-static-i18n`) so the structure can accommodate multiple languages without a disruptive reorganization. In the near term, documenting the intended approach—even if implementation is deferred—would help contributors plan content accordingly.
+Localization is absent but not blocked. There is no demand documented, no framework configured, and no language directory, so this is a low priority; the main cost of the current layout is that adding a first translation later would require moving every file.
+
+Strengths:
+
+- Simple, low-dependency MkDocs toolchain with search enabled on every page.
+- Custom search separator tuned for hyphenated and dotted Kubernetes identifiers.
+- Explicit `.nav.yml` ordering and a centralized redirects map preserve URLs across reorganizations.
+- Makefile targets for local build, spell check, and link check.
+- Release branches exist for recent minors, providing a foundation for versioned publishing.
+
+Weaknesses:
+
+- No published version selector; the live site tracks `main` only.
+- No document describes the purpose, lifecycle, or publication status of the `release-vX.Y-*` branches, or when to cherry-pick.
+- Version applicability is signaled inconsistently through ad hoc "as of vX.Y" banners on a minority of pages.
+- No localization framework, language directory, or stated position on translation.
+- Search does not span the API reference, quickstarts, or labs hosted elsewhere on kubevirt.io.
 
 Rating: 3 - Meets standards

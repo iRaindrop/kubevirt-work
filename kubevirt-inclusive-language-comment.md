@@ -1,9 +1,21 @@
-# Inclusive Language - Comment
+# KubeVirt inclusive language: comment
 
-The KubeVirt user guide scores well on naming inclusivity. A review of the documentation found no KubeVirt-defined utilities, endpoints, class names, or feature names that use non-recommended terms from the Inclusive Naming Initiative, and no occurrences of words such as "slave", "whitelist", "blacklist", or "sanity check". The term "master" does appear, but exclusively in contexts the project does not control—external URLs and Git branch names, version path segments in the API reference, a third-party CNI bonding field (`"master": "eth1"`), a Kubernetes node-label example, and verbatim QEMU/libvirt command output. Because none of these are names coined by KubeVirt, no renaming is warranted; the guide is already clean on this dimension.
+The KubeVirt user guide is in good shape on inclusive naming. KubeVirt's own API objects, components, CLI, and feature gates avoid all Inclusive Naming Initiative tier-1 terms, the project's default branch is `main`, and the guide already uses "allowlist" where the older term might have appeared. The remaining occurrences of "master" are in URLs and third-party content, and the only one under the project's control, the 14 links to the API reference at the legacy `/master/` path, is a mechanical fix now that the API reference publishes under `/main/` and per-version paths. Field names such as `Abort Requested` are part of the KubeVirt API and are a question for the API maintainers rather than the documentation.
 
-The clearer opportunity is the pervasive use of minimizing language. Words like "simple", "simply", "easy", and "easily" appear roughly 80 times across dozens of pages, often in explanatory prose that judges difficulty on the reader's behalf—for example "allows easy creation of", "which can be simply mounted", "as easy as", and "is as simple as". This phrasing can unintentionally discourage readers who find a task harder than described, and it rarely adds information. The most actionable improvement is to replace these subjective qualifiers with concrete, factual descriptions: state the number of steps, name the single command involved, or simply remove the adjective. Care should be taken to preserve legitimate proper nouns and identifiers, such as the passt project's "Plug A Simple Socket Transport", the "PCI Simple" Windows device, and example resource names like `simple-vm`.
+The one systemic concern is minimizing language. Words such as "simply", "simple", "easy", "easily", and "just" appear over a hundred times across 40 percent of pages. This language tells a reader who is struggling with a step that the step should have been easy, and in almost every case it can be deleted with no loss of meaning. Because the repository's spelling check has no rule for these words, the pattern will continue in new pages unless a style rule or lint check is added.
 
-To make this sustainable, the project could add the flagged minimizing terms to its existing yaspeller-based checks or adopt a dedicated inclusive-language linter (for example, an `alex` or Vale style rule) in CI. Automating detection would keep new contributions consistent and reduce the manual review burden, building on the strong naming foundation the guide already demonstrates.
+Strengths:
 
-Rating: 3 - Meets standards
+- No Inclusive Naming Initiative tier-1 terms in KubeVirt-controlled names, commands, or feature gates.
+- "Allowlist" is used consistently for `permittedHostDevices`.
+- No gendered pronouns or other exclusionary terms in prose.
+- kubevirt.io home page is free of non-recommended terms.
+
+Weaknesses:
+
+- Over a hundred uses of "simple", "simply", "easy", "easily", and "just" across 39 pages.
+- Fourteen API reference links still use the legacy `/api-reference/master/` path.
+- A `kubevirt.io/nodeName: master` example remains on the Presets page.
+- No style rule or automated check discourages minimizing language in new content.
+
+Rating: 4 - Meets or exceeds standards

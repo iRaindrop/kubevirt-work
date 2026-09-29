@@ -1,11 +1,24 @@
 # Case Studies - Comment
 
-KubeVirt has a strong base of community and adoption content, though it lives on the main `kubevirt.io` website rather than in the user guide. The website maintains an active blog with recent posts dated 2026, organizes community talks into curated YouTube playlists (Talks, Demos, Interviews, and the annual KubeVirt Summit), and presents an extensive logo wall of adopting organizations grouped into End Users, Vendors, and Integrations. These are clear signals of a healthy, active project and provide good social proof for prospective users.
+KubeVirt has more adoption evidence than its websites show. The project maintains a curated adopters list with first-person use-case statements from well-known production users, publishes talks, demos, interviews, and five years of Summit recordings, keeps a blog that still produces substantive release and feature posts, and is featured in two CNCF-published end-user case studies. The logo wall and video section on `kubevirt.io` are well organized and clearly signal an active, widely adopted project.
 
-The main gaps are dedicated case studies and user testimonials. The adopter logo walls show who uses KubeVirt but do not explain how or why, and there are no quoted testimonials describing real-world outcomes. Narrative case studies, even a small number, would help prospective adopters understand practical use cases, migration paths, and the benefits organizations have realized. These carry particular weight for an infrastructure project where adoption decisions are significant.
+The weakness is that the most persuasive material is disconnected from where prospective users look. The CNCF case studies are not linked from either property, the adopter use-case statements live only in a GitHub Markdown table while the website shows bare logos, and no blog category or page collects user stories. The result is that the project appears to have a logo wall and a blog but no case studies or testimonials, when in fact it has the raw material for both. Blog cadence has also fallen from about two posts a month to a handful a year, and the flat `news` category makes the archive hard to browse by theme.
 
-From the user guide's perspective, the more immediate issue is discoverability. The guide is technical documentation and does not link to the blog, community talks, or adopter logo wall at all. A reader who lands in the user guide has no easy path to this adoption and community content, even though it exists one site over. Adding a few targeted links, for example from the landing page or a "Community" or "Adopters" entry, would connect readers to material that builds confidence in the project.
+From the user guide's side, the gap is discoverability. The guide is where evaluators end up when they want to know whether KubeVirt fits their environment, yet its landing page and navigation contain no link to adopters, case studies, talks, or the blog. Only `contributing.md` mentions the website's community content, and it frames it as a place to contribute rather than a place to learn.
 
-Overall, the project scores well on blog, talks, and a logo wall, but lacks true case studies and testimonials, and the user guide does not surface the adoption content that already exists. Closing those gaps would round out this area.
+Strengths:
+
+- Curated adopters list with a "Since" year and first-person use-case text for roughly 44 organizations, including major production users.
+- Three-category logo wall on the landing page, kept in sync with `ADOPTERS.md` through a documented process.
+- Video section with separate Talks, Demos, Interviews, Summit, and Weekly Meetings playlists, plus an annual Summit with a public CfP.
+- Blog posts remain technically substantive when published.
+
+Weaknesses:
+
+- Two CNCF case studies featuring KubeVirt are not linked from `kubevirt.io` or the user guide.
+- Adopter use-case statements are dropped when the adopters list is rendered as a logo wall.
+- No attributed testimonials, case-study page, or blog category for user stories.
+- Blog cadence has declined sharply since 2020 and categorization is nearly flat.
+- The user guide does not link to adopters, case studies, talks, or the blog.
 
 Rating: 3 - Meets standards

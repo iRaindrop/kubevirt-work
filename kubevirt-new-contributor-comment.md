@@ -1,11 +1,23 @@
-# New Contributor Getting Started Content - Comment
+# KubeVirt new contributor getting started content: comment
 
-KubeVirt provides strong new contributor getting started content. The user guide's Contributing page serves as a single, well-organized entry point that covers prerequisites, a clear "Your first contribution" section, separate tracks for documentation and code contributors, and links to essential community resources such as the code of conduct, membership policy, and governance. Importantly, the community repository's own contributor file redirects to this page rather than duplicating it, so there is one canonical source of truth. This structure reflects a deliberate onboarding path rather than a bare pointer to the issue tracker.
+KubeVirt has a genuine new-contributor document and a mature community repository behind it. The user guide's Contributing page is written for someone making their first open source contribution: it sets expectations, points to low-barrier repositories, offers non-code ways to start, and links the governance, membership, code of conduct, and AI contribution policies. The kubevirt/community repository supplies the depth, including a SIG list, a membership checklist, a help-wanted label guide, and a detailed community meeting document, and both sides point at each other as the canonical entry.
 
-The project also gives newcomers a real community home. The `kubevirt/community` repository documents SIGs and working groups, community meetings, membership progression, and maintainers, and the website exposes a companion community section that the contributing page links to directly. Combined with a linked New Contributor session recording, a first-time contributor has both written and video onboarding material and a clear picture of how the community is organized.
+The weakness is the hand-off from motivation to action. The Contributing page ends where a newcomer needs the most guidance: how to pick and claim an issue, how to fork, sign off, and open a pull request, what the Prow labels mean, and who will review. Those mechanics exist but are scattered across the repository README, kubevirt/kubevirt CONTRIBUTING.md, and kubevirt/kubevirt `docs/getting-started.md`, none of which is presented as the next step. The page also directs newcomers to `good-first-issue` lists that are currently empty, and does not name a channel, person, or meeting where a stuck contributor can ask for help. The community repository's most useful contributor resources (SIG list, help-wanted guide, meeting document, MAINTAINERS) are not linked from the guide at all.
 
-The main opportunity for improvement is the "Getting help" experience, which is thinner and less consistent than the rest of the onboarding content. In the user guide it is a three-bullet section at the bottom of the landing page that lists the issue tracker, mailing list, and the `#virtualization` Slack channel, but it omits the community page and the `#kubevirt-dev` Slack channel that appear in other sources. Consolidating these entry points and surfacing them more prominently would remove ambiguity about where to ask questions.
+Strengths:
 
-A second, smaller gap connects to the beginner issue backlog: the contributing page tells newcomers to look for `good-first-issue` items, but that backlog is currently empty, so a motivated first-timer following the documentation can reach a dead end. Keeping a small pool of curated beginner issues would let the otherwise excellent onboarding content deliver on its promise.
+- A dedicated, welcoming Contributing page that is the canonical entry point from both CONTRIBUTING.md and kubevirt/community.
+- Explicit low-barrier starting points (documentation, website, community repositories) and non-code ways to contribute.
+- A New Contributor session recording on YouTube.
+- A comprehensive kubevirt/community repository with governance, membership, SIG, and meeting documentation.
+- Community page and Welcome page surface the primary help channels.
 
-Rating: 4 - Meets or exceeds standards
+Weaknesses:
+
+- The Contributing page omits the contribution mechanics (claiming an issue, fork and PR flow, DCO, Prow labels, review expectations).
+- Newcomers are sent to `good-first-issue` lists that are empty.
+- No contributor-specific help guidance: which Slack channel to ask in, who reviews documentation, whether mentoring is available.
+- The SIG list, help-wanted guide, community meeting document, and MAINTAINERS file in kubevirt/community are not linked from the guide.
+- Build and test instructions for the guide live only in the repository README, not on the Contributing page.
+
+Rating: 3 - Meets standards

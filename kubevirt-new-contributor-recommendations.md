@@ -1,12 +1,11 @@
-# New Contributor Getting Started Content - Recommendations
+# KubeVirt new contributor getting started content: recommendations
 
-The following recommendations address the New Contributor Getting Started Content of the KubeVirt user guide.
+The following recommendations address the new contributor getting started content of the KubeVirt user guide.
 
-- Consolidate and strengthen the "Getting help" section on the user guide landing page so it lists all primary channels in one place: the `#virtualization` and `#kubevirt-dev` Slack channels, the `kubevirt-dev` mailing list, the community page, and the issue tracker.
-- Make the "Getting help" information easier to find by linking to it from the contributing page and considering a more prominent placement than the bottom of the index page.
-- Keep a small, curated pool of open `good-first-issue` items so that newcomers who follow the "Your first contribution" guidance always have actionable work, rather than reaching an empty backlog.
-- Add a direct, filtered link from the contributing page to the current `good-first-issue` list (for example, a saved label query) so first-timers reach real issues in one click.
-- Ensure help and community entry points are consistent across the user guide, the contributing page, and the `kubevirt/community` README, since they currently list slightly different channels.
-- Consider adding a brief "how to ask a good question" note or expected-response-time guidance near the help channels so new contributors know what to include and where questions are best directed.
-- Continue using the community repository's redirect-to-canonical approach for contributor docs, and periodically verify that all "get started" links across repositories still resolve to the single canonical contributing page.
-- Optionally surface the New Contributor session recording and the community meeting schedule closer to the "Your first contribution" section so newcomers can quickly find live, synchronous ways to get onboarded.
+- Add a "Making your first documentation change" section to the Contributing page that walks through the mechanics end to end: find or file an issue, comment to claim it, fork and branch, edit under `docs/` and update `.nav.yml`, run `make check_spelling` and `make check_links`, sign off with `git commit -s`, open the pull request, and what to expect from Prow (`ok-to-test`, `lgtm`, `approved`) and reviewers. Move the build and test steps from the repository README here or link them prominently.
+- Add a "Where to ask for help" section to the Contributing page that names `#kubevirt-dev` on Kubernetes Slack for contributor questions and `#virtualization` for usage questions, links the Slack invitation page, states that the weekly community meeting includes newcomer introductions with the day, time, and Zoom link, and identifies the documentation approvers or a docs contact.
+- Link the kubevirt/community resources that newcomers need directly from the Contributing page: the SIG list (to find the right SIG for a topic), the help-wanted guide (to understand the labels), the community meeting document, and the MAINTAINERS file.
+- Replace the generic "look for good-first-issue" advice with a direct link to the filtered issue list for each repository, and pair this with the beginner issue backlog recommendations so the lists are populated when newcomers arrive.
+- Add a "Contributing to the code" subsection that summarizes the kubevirt/kubevirt path in three or four steps (read CONTRIBUTING.md, follow `docs/getting-started.md` to build and run a local cluster, pick an issue, open a draft PR) so code-minded newcomers see a clear next step rather than a single link.
+- Ask the community whether a lightweight mentoring or buddy arrangement exists or could be offered for first-time contributors, and document it on the Contributing page if so; the help-wanted guide already promises "extra assistance" on `good first issue` items, so state how to request it.
+- Repeat the "Getting help" links from the Welcome page in CONTRIBUTING.md and on the Contributing page so contributors do not have to navigate back to the home page to find a channel.

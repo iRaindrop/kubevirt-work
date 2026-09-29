@@ -1,11 +1,23 @@
 # Maintenance Planning - Comment
 
-The KubeVirt user guide is on a solid maintenance footing. It is built with MkDocs and the Material for MkDocs theme, supplemented by the `awesome-nav`, `redirects`, and `htmlproofer` plugins. Although this differs from the Hugo and Docsy stack, MkDocs Material is a mature and widely adopted documentation toolchain used across the CNCF and Kubernetes ecosystems, so maintainers can rely on strong community support and a steady stream of upstream updates.
+The KubeVirt documentation infrastructure is low-maintenance by design and largely automated. The user guide runs on MkDocs Material, one of the most widely adopted documentation stacks in the cloud-native ecosystem, and both sites are published to GitHub Pages by a Prow job within a minute or two of merge. HTTPS is enforced everywhere, Netlify provides pull-request previews, and Dependabot keeps the Jekyll site's dependencies current. For a project of KubeVirt's size, the tooling choices are sensible and the deploy pipeline is fast and hands-off.
 
-Maintenance responsibility is clearly structured and actively exercised. The repository uses the Kubernetes-style OWNERS model, defining reviewers and approvers roles and recording emeritus approvers, which gives maintainers appropriate permissions to review and merge changes. The commit history reflects a healthy, cultivated community, with roughly 49 distinct authors in the last twelve months and a continuous flow of merged pull requests, so the guide is not dependent on a single maintainer.
+The risk lies in people rather than tooling. The two sites use different generators, so a maintainer must know both Jekyll and MkDocs, and the main site's hand-built Bootstrap theme has no upstream to inherit fixes from. Commit history shows the documentation effort leaning on a single active maintainer, the community's `sig/documentation` label has no chairs or members, and neither repository describes how someone grows into a website maintainer role or who holds the keys to Netlify, DNS, GitHub Pages settings, and the Prow job definitions. If that maintainer stepped away, the project would have working automation but no documented map of who can change it.
 
-The build and hosting setup is dependable. MkDocs builds this static site quickly, Netlify produces per-pull-request previews, and the project's Prow-based CI builds the site as well. The site is served securely: HTTPS returns a 200 response, and HTTP requests are 301-redirected to HTTPS for both the user guide path and the apex domain. These are exactly the properties one wants for low-friction, secure maintenance.
+Strengths:
 
-The main opportunities are around build reproducibility and stack consolidation. The build installs MkDocs and its plugins without pinned versions (in `netlify.toml` and the `Makefile`), which risks non-reproducible builds or breakage when an upstream package changes; pinning versions would harden this. Maintaining two separate stacks (MkDocs for the user guide and Jekyll for the main site) also adds ongoing overhead worth periodically reviewing.
+- MkDocs Material for the user guide is well supported and common among CNCF projects.
+- Fully automated publish pipeline: merge to `main` triggers a Prow job that pushes to `gh-pages` in roughly 40 to 90 seconds.
+- HTTPS everywhere, with HTTP and `www` redirecting to the canonical HTTPS domain.
+- `OWNERS` files are maintained, including dated emeritus entries on the website repository.
+- Netlify pull-request previews and a periodic Prow link checker catch problems before and after publish.
 
-Rating: 4 - Meets or exceeds standards
+Weaknesses:
+
+- Two different static-site generators and a custom Jekyll theme double the maintenance surface.
+- No documented path for cultivating website maintainers; the `sig/documentation` entry in the community SIG list is empty.
+- Heavy reliance on one active documentation maintainer across both repositories.
+- Administrative access to Netlify, DNS, GitHub Pages, and Prow job definitions is undocumented.
+- No `Strict-Transport-Security` header on production responses.
+
+Rating: 3 - Meets standards

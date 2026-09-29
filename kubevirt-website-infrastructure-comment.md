@@ -2,16 +2,32 @@
 
 | Criterion | Rating (1-5) |
 | --------- | ------------ |
-| Usability, accessibility, and design | 4 - Meets or exceeds standards |
+| Single-source for all files | 2 - Needs improvement |
+| Meets min website req. (for maturity level) | 3 - Meets standards |
+| Usability, accessibility, and design | 3 - Meets standards |
 | Branding and design | 4 - Meets or exceeds standards |
 | Case studies/social proof | 3 - Meets standards |
 | SEO, Analytics, and site-local search | 2 - Needs improvement |
-| Maintenance planning | 4 - Meets or exceeds standards |
+| Maintenance planning | 3 - Meets standards |
 
-KubeVirt's website and infrastructure are on a strong footing overall, rating "meets or exceeds standards" in three of the five criteria. The Material for MkDocs foundation delivers a responsive, mobile-friendly site with clean typography, semantic landmarks, descriptive ARIA labels, a "Skip to content" link, and complete image alt text, so usability and accessibility are strong at the structural level. The brand is clear and consistently applied, with the teal palette and logo defined at the theme level rather than per author. Maintenance is dependable and not dependent on a single person: the repository uses the Kubernetes-style OWNERS model, draws on roughly 49 distinct authors over the last year, builds quickly through Netlify previews and Prow CI, and serves securely over HTTPS. The recommended improvements are mostly targeted fixes rather than structural changes.
+Other Metrics:
 
-The highest-impact gap—and the section's lowest rating—is the complete absence of analytics. Neither the user guide nor the main site includes any analytics tags, so there is no visibility into traffic, popular pages, search terms, or broken inbound links, and 404 reports cannot be generated to guide maintenance. This absence is consistent with the project's privacy posture, which is a legitimate trade-off, but if the project wants data to drive documentation improvements, adopting a privacy-respecting option (GA4 or an alternative), enabling it only on the production deploy, and documenting the account custodians would close an important blind spot. Two smaller SEO fixes accompany it: make the preview `noindex` behavior an explicit project setting rather than relying on the Netlify default, and correct the double slash in the `robots.txt` sitemap URL.
+| Criterion                                   | Rating (1-5) |
+| ------------------------------------------- | ------------ |
+| A11y plan & implementation                  | 3 - Meets standards |
+| Mobile-first plan & implementation          | 3 - Meets standards |
+| HTTPS access & HTTP redirect                | 4 - Meets or exceeds standards |
+| Google Analytics 4 for production only      | 1 - Not present |
+| Indexing allowed for production server only | 3 - Meets standards |
+| Intra-site / local search                   | 4 - Meets or exceeds standards |
+| Account custodians are documented           | 1 - Not present |
 
-A cross-cutting accessibility theme surfaces in both the usability and branding analyses: color contrast on the brand teal. The primary teal (`#0db2b6` in `docs/stylesheets/extra.css`) yields only about 2.6:1 against white header text—below the WCAG AA thresholds of 4.5:1 for normal text and 3:1 for large text—and body links darkened with `filter: brightness(80%)` reach only about 3.96:1. Because this styling is defined once at the theme level, darkening the primary teal (or the text on it) and re-checking links in both the light and dark schemes is a small, high-value change that affects color-impaired and low-vision readers most. Adding an automated contrast and accessibility check to the build would keep the fix from regressing.
+The KubeVirt web presence rests on a sound platform. MkDocs Material gives the user guide responsive layout, accessibility affordances, full-text search, and sitemaps for free; a Prow pipeline republishes both sites to GitHub Pages over HTTPS within a minute or two of merge; branding is applied once at the theme level; and the main website footer is a model of CNCF compliance. The project also has more adoption evidence than most incubating projects. The shortfalls are in measurement, connection, and stewardship rather than in the tooling.
 
-Two further themes concern connecting the guide to the wider project and hardening the stack. The strong adoption and community content—an active blog, curated talk playlists, and an extensive adopter logo wall—lives on `kubevirt.io` and is not linked from the user guide at all, so readers have no easy path to this social proof; the guide would also benefit from a few narrative case studies or testimonials that explain how and why organizations use KubeVirt. This mirrors a broader cross-property gap, since the MkDocs guide and the separate main site share a logo and color family but not an identical look and feel. Documenting a small set of shared brand values and adding targeted links (for example, a "Community" or "Adopters" entry) would align the two properties and surface existing content. On the infrastructure side, the build installs MkDocs and its plugins without pinned versions in `netlify.toml` and the `Makefile`, which risks non-reproducible builds; pinning versions and periodically reviewing the overhead of maintaining two separate stacks would sustain the section's already solid maintenance posture.
+Three themes recur across the areas:
+
+- The user guide is invisible to the project. It carries no analytics, so nobody can see which pages are read, which searches fail, or which inbound links break. Nobody is documented as custodian of the analytics, Netlify, Search Console, DNS, or GitHub Pages accounts, the community `sig/documentation` entry has no members, and both repositories lean on one active documentation maintainer.
+- The web properties do not act as one. Pages under `kubevirt.io` are built from three repositories with no documented content boundary, and user-facing content also sits in the core and CDI code repositories. The guide and the main site differ in generator, logo, typeface, header, and footer; neither search covers the other; and the guide links to none of the adopters, case studies, talks, or blog that make the project's case. The guide's footer also lacks the copyright, CNCF, and trademark elements the main site carries.
+- Small defects touch every page. Header text fails WCAG AA contrast, `robots.txt` has a malformed sitemap URL, `netlify.toml` carries dead configuration, and production lacks an HSTS header. Each is a one-line fix.
+
+The branding implementation, the automated publish pipeline, and the main website footer are strong enough to cite as examples for other projects.

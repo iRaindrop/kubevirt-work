@@ -1,0 +1,9 @@
+# Single-Source Requirement - Recommendations
+
+The following recommendations address the single-source requirement of the KubeVirt user guide.
+
+- Document the content boundary. Add a short "Where documentation lives" section to the README of `kubevirt/user-guide`, `kubevirt/kubevirt.github.io`, and `kubevirt/kubevirt` stating that user and operator documentation belongs in the user guide, marketing, blog, and community content belongs on the website, and `kubevirt/kubevirt/docs` is for design and developer notes only. Link to it from `docs/contributing.md` in the user guide.
+- Audit `kubevirt/kubevirt/docs` for user-facing content. Start with the files the user guide already links to (`getting-started.md`, `architecture.md`, `cloud-init.md`), move the user-facing portions into the guide, and replace the originals with a one-line pointer so search results and old links still resolve.
+- Do the same triage for the CDI `doc/` directory: move the pages the user guide links to from six storage pages into the guide's `storage/` section, or add a clear "CDI reference documentation" page in the guide that explains why the rest remains in the CDI repository.
+- Decide whether the website and user guide should share a repository, and record the decision. If they stay separate, note the reason (different generators, maintainers, and audiences) in both READMEs. If the project later converges the two toolchains, as suggested in the maintenance-planning recommendations, move the website pages into the user-guide repository or bring the guide into the website repository as a Git submodule.
+- Give the API reference a visible home in the user guide by adding a navigation entry or landing page that links to `kubevirt.github.io/api-reference`, so readers do not need to know it is published from a separate repository.

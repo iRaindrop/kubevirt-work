@@ -1,0 +1,11 @@
+# KubeVirt content maintainability: recommendations
+
+The following recommendations address the content maintainability of the KubeVirt user guide.
+
+- Document the content versioning model in CONTRIBUTING.md (and summarize it on the Contributing page). State what the `release-vX.Y-stable` and `release-vX.Y-devel` branches are for, when they are cut relative to a KubeVirt release, which one Netlify publishes, and how a contributor decides whether a change on `main` needs a cherry-pick. Ask the maintainers to confirm the intended workflow first, since the `-devel` branches exist for 1.7 and 1.8 but not 1.9.
+- Publish versioned documentation with a version selector, using either `mike` with mkdocs-material's `extra.version.provider: mike` or a Netlify build per release branch under a `/vX.Y/` path. Publish at least the supported N, N-1, and N-2 minors alongside `latest`.
+- Until versioned publishing exists, adopt a standard feature-state admonition and apply it consistently to every feature page, stating the version introduced and the current stage (Alpha, Beta, GA, Deprecated). Nine pages use a `FEATURE STATE:` block today; formalize its format in CONTRIBUTING.md so new pages follow it.
+- Document the release-notes update process: when `update_changelog.sh` is run, by whom, and how the result is reviewed, so the page continues to be regenerated after maintainer turnover.
+- Enable the mkdocs-material search features `search.suggest`, `search.highlight`, and `search.share` under `theme.features` in `mkdocs.yml`; this is a one-line change that improves search usability.
+- Add a short "Localization" statement to CONTRIBUTING.md that records the project's current position (English only, translations not currently accepted, or translations welcome via a stated process). If translations are anticipated within the next few releases, move content to `docs/en/` now and configure the `mkdocs-static-i18n` plugin, so the redirects and `.nav.yml` files only need to change once.
+- Ask the KubeVirt website maintainers whether the API reference and quickstarts can be indexed by the same search as the user guide, for example by moving the user guide search to a site-wide index, so users can search the full documentation set from one place.
