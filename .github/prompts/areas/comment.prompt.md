@@ -9,15 +9,16 @@ Reusable procedure for writing an analysis comment for one area. Normally invoke
 
 ## Inputs
 
-- Area — the criteria area to analyze. When run from a wrapper, the wrapper names it. If you reached this engine without an area, ask the user to choose one of: `information-architecture`, `new-user-content`, `content-maintainability`, `content-creation-process`, `inclusive-language`.
+- Area — the criteria area to analyze. When run from a wrapper, the wrapper names it. 
 - Title (optional) — overrides the default output filename.
 
 ## Procedure
 
 1. Read the criteria definition at `.github/prompts/criteria/<area>.md`. Use its Display name, File stem, and Comment guidance (good examples and any additional instructions).
 2. Determine the project name and documentation label from the "Current Repository" section of the repository Copilot instructions (for example, "the KubeVirt user guide"). Derive the project slug by lowercasing the name and replacing spaces with hyphens.
-3. Write a two to four paragraph comment on the area's subject (its Display name) in the documentation. Keep it concise, actionable, and focused on improving the documentation. Apply any "Additional instructions" from the criteria file. You may reference the listed "good examples" as models of quality.
-4. Add a rating for this area, using the CNCF 1–5 scale:
+3. Write one to three paragraphs for a high-level comment. No need to replicate points from the answers output. Follow with two bulleted lists: one of strengths and one of weaknesses. Preceded the lists with labels (not bold) "Strengths:" and "Weaknesses:".
+4. You can follow with any "Additional instructions" from the criteria file. You may reference the listed "good examples" as models of quality.
+5. Add a rating for this area, using the CNCF 1–5 scale:
    - 1 - Not present
    - 2 - Needs improvement
    - 3 - Meets standards
@@ -33,3 +34,4 @@ Reusable procedure for writing an analysis comment for one area. Normally invoke
 - Write the result to a Markdown file in the current directory:
   - If a title was provided, name the file `<title>.md`.
   - Otherwise name it `<project-slug>-<stem>-comment.md`.
+  - If a file exists by the same name, overwrite it.

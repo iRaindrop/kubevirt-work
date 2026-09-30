@@ -20,7 +20,10 @@ This is the reusable procedure for answering an analysis area's questions. It is
 
 ## Output
 
-- Present the answers as indented paragraphs under each question. If an answer is "yes" or "no", provide a brief explanation. Do not bold the answers.
+- Present the answers as indented paragraphs by two spaces under each question. Format each question as a bullet, not as a heading. Do not bold the answers.
+- If an answer is "yes" or "no", provide a brief explanation.
+- Aim for two to three paragraphs. 
 - Write the result to a Markdown file in the current directory:
   - If a title was provided, name the file `<title>.md`.
   - Otherwise name it `<project-slug>-<stem>-answers.md`.
+  - If a file exists by the same name, overwrite it.

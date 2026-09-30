@@ -29,7 +29,21 @@ This engine reads the per-area comment files that already exist in the current d
    | <criterion label> | <n> - <label> |
 
    If an area comment has no `Rating:` line, use `N/A` for that row.
-6. Write a two to five paragraph overall comment on the section beneath the table. Synthesize rather than concatenate: lead with the section's overall standing, then group cross-cutting themes that recur across two or more areas, and surface the highest-impact gaps first. Keep it concise, actionable, and in complete sentences, following the repository's analysis response style.
+6. If `website-infrastructure` is the current section, add this table and its label for these other metrics:
+
+   Other Metrics:
+
+   | Criterion                                   | [Rating (1-5)] |
+   | ------------------------------------------- | -------------- |
+   | A11y plan & implementation                  | [rating (1-5)] |
+   | Mobile-first plan & implementation          | [rating (1-5)] |
+   | HTTPS access & HTTP redirect                | [rating (1-5)] |
+   | Google Analytics 4 for production only      | [rating (1-5)] |
+   | Indexing allowed for production server only | [rating (1-5)] |
+   | Intra-site / local search                   | [rating (1-5)] |
+   | Account custodians are documented           | [rating (1-5)] |
+
+7. Write a two to five paragraph overall comment on the section beneath the table(s). Synthesize rather than concatenate: lead with the section's overall standing, describe only the most important cross-cutting themes that recur across two or more areas. Do not describe detailed suggestions, as they should be covered in the per-area comments and recommendations. Avoid large paragraphs with listed details, so use bulleted lists where appropriate. Keep it concise, actionable, and in complete sentences, following the repository's analysis response style.
 
 ## Output
 

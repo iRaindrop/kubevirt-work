@@ -1,26 +1,24 @@
 # Information architecture - Project Documentation
 
-- Display name: information architecture
-- File stem: info-arch
+- Display name: Information architecture
+- File stem: information-architecture
 
 ## Questions
 
-- Is there high level conceptual/“About” content? Is the documentation feature
-  complete? (i.e., each product feature is documented)
-- Are there step-by-step instructions (tasks, tutorials) documented for
-  features?
-- Are there any key features which are documented but missing task
-  documentation?
-- Is the “happy path”/most common use case documented? Does task and tutorial
-  content demonstrate atomicity and isolation of concerns? (Are tasks clearly
-  named according to user goals?)
-- If the documentation does not suffice, is there a clear escalation path for
-  users needing more help? (FAQ, Troubleshooting)
-- If the product exposes an API, is there a complete reference?
+- Is there high level conceptual content?
+- Is the documentation feature complete?
+- Are there step-by-step instructions documented for features in tasks and tutorials?
+- Are there any key features that are documented but missing task documentation?
+- Is the “happy path” (most common use case) documented? 
+- Are tasks clearly named according to user goals?
+- If the documentation doesn't suffice, is there a clear escalation path for users needing more help? (FAQ, Troubleshooting)
+- If the product exposes an API, is there a complete reference that includes documented CLIs as applicable?
 - Is content up to date and accurate?
+- Does the documentation need restructuring?
+
 
 ## Comment guidance
 
 - Good examples:
   - https://prometheus.io/docs
-- Additional instructions: Include a True/False evaluation whether or not a restructure of the content is needed.
+- Additional instructions: None.

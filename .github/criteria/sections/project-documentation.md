@@ -11,7 +11,7 @@ ratings table) and the stem of its existing per-area comment file
 
 | Criterion | Comment file stem |
 | --------- | ----------------- |
-| Information architecture | info-arch |
+| Information architecture | information-architecture |
 | New user content | new-user |
 | Content maintainability | content-maintainability |
 | Content creation processes | content-creation-process |

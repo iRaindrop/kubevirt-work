@@ -5,14 +5,13 @@
 
 ## Questions
 
-- Is “getting started” clearly labeled? (“Getting started”, “Installation”,
+- Is “Getting started” clearly labeled? (e.g “Getting started”, “Installation”,
   “First steps”, etc.)
 - Is installation documented step-by-step?
-- If needed, are multiple OSes documented?
+- If needed, is guidance provided for multiple operating systems and platforms?
 - Do users know where to go after reading the getting started guide?
-- Is your new user content clearly signposted on your site’s homepage or at the
-  top of your information architecture?
-- Is there sample code or other example content that can easily be copy-pasted?
+- Is your new user content clearly discoverable, such as on the documentation home page?
+- Is there sample code or content that can easily be copy-pasted?
 
 ## Comment guidance
 

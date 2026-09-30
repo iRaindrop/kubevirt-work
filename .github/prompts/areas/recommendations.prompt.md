@@ -16,8 +16,9 @@ Reusable procedure for producing recommendations for one area, based on the prev
 
 1. Read the criteria definition at `.github/prompts/criteria/<area>.md` for its Display name and File stem.
 2. Determine the project name and documentation label from the "Current Repository" section of the repository Copilot instructions. Derive the project slug by lowercasing the name and replacing spaces with hyphens.
-3. Read the answers and comment produced for this area from the current directory: `<project-slug>-<stem>-answers.md` and `<project-slug>-<stem>-comment.md`. If either file is missing, ask the user to run the corresponding answers or comment prompt first (or to point you at the files).
+3. Read the answers and comment produced for this area from the current directory: `<project-slug>-<stem>-answers.md` and `<project-slug>-<stem>-comment.md`. If either file is missing, ask the user to run the corresponding answers or comment prompt first (or to point you at the files). If the comment file contains a recommendation, move it to the recommendations file.
 4. Base the recommendations on those two documents.
+
 
 ## Output
 
@@ -25,3 +26,6 @@ Reusable procedure for producing recommendations for one area, based on the prev
 - Write the result to a Markdown file in the current directory:
   - If a title was provided, name the file `<title>.md`.
   - Otherwise name it `<project-slug>-<stem>-recommendations.md`.
+  - If a file exists by the same name, overwrite it.
+  
+
