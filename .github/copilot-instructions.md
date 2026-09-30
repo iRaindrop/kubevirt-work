@@ -37,58 +37,101 @@ Analysis criteria is further specified in the prompt files under `.github/prompt
 
 ## Analysis responses style
 
-Responses should be concise, actionable, and focused on improving the documentation. Keep in mind the following points:
+Readers of the analysis are Kubernetes subject-matter experts who want to improve the documentation quickly. Write for them: be concise and actionable, and skip explanations they don't need.
 
-- Write complete sentences whenever possible. Avoid fragments.
-- Fragments are ok if in a bullet list with an introductory sentence.
-- Avoid not widely-known terms or acronyms, or provide a brief explanation of them.
-- Nuances are not as important as actionable recommendations.
-- If a predefined prompt says to write up to four paragraphs, there's no need to write more than necessary to meet the maximum.
+- Write in complete sentences, using active voice and the imperative mood.
+- Fragments are fine inside a bulleted list that follows an introductory sentence.
+- Explain any term or acronym that a senior Kubernetes engineer might not
+  know. 
+- Don't list technologies in parentheses; readers already know them.
+- Use parentheses only when the content is needed to understand the
+  recommendation.
+- When a sentence would list four or more items, end the paragraph with an
+  introductory sentence followed by a bulleted list of the items.
+- You can refer to Markdown files instead of page titles; but unless the name is obvious, also provide the page title. No need to include relative paths as long as the page title is clear.
+- Keep paragraphs under about 4 sentences; split longer ones.
+- Treat any paragraph limit in a prompt as a maximum, not a target.
+- If you're unsure whether something is technically wrong, phrase it as a question for the SME rather than asserting it.
+- Follow Kubernetes documentation conventions: UpperCamelCase for API objects (Pod, Deployment), and code formatting for commands, fields, and file names.
 
-## Predefined Prompts
+## Analysis Criteria and Predefined Prompts
 
-The analysis prompts live under `.github/prompts/` and are organized into three layers so the per-area questions (data) are separated from the task logic (verbs):
+The analysis groups areas into three sections (Project Documentation, Contributor Documentation, and Website & Infrastructure). Each section contains multiple areas, and each area has its own criteria and prompts for evaluation.
+
+The AI assisted analysis scaffolding is organized into two types of files: criteria and prompt Markdown files. These files are organized further by `areas` and `sections` folders. These files live under `.github/criteria/areas`, `.github/criteria/sections`, `.github/prompts/areas`, and `.github/prompts/sections` respectively. Generated output lives in `.github/output`.
+
+```
+.github/
+  copilot-instructions.md
+  criteria/
+    areas/<area>.md              # Per-area data: display name, file stem, questions, comment guidance
+    sections/<section>.md        # Per-section data: display name, slug, member areas and comment-file stems
+  prompts/
+    areas/
+      answers.prompt.md          # Shared engines
+      comment.prompt.md
+      recommendations.prompt.md
+      full.prompt.md
+      <area>-<type>.prompt.md    # Per-area wrappers
+    sections/
+      section-comment.prompt.md  # Shared engine
+      <section>-comment.prompt.md  # Per-section wrappers
+  output/
+    <project-slug>-<stem>-<type>.md            # Per-area outputs
+    <project-slug>-<section-slug>-comment.md   # Section-level comments
+```
+
+Criteria files for an area define the per-area data: display name, output-file stem, question set, and comment guidance. The area name is the criteria filename without `.md` (for example, `.github/criteria/areas/information-architecture.md` defines the `information-architecture` area).
+
+Criteria files for a section define the section's display name, slug, and member areas (with the stem of each area's comment file).
+
+Prompt files for areas are organized into three layers so the per-area questions (data) are separated from the task logic (verbs):
 
 - Per-area wrappers (`<area>-<type>.prompt.md`) — the entry points you invoke, for example `/information-architecture-answers`. Each wrapper simply binds one criteria area to one shared engine.
-- Shared engines (`answers.prompt.md`, `comment.prompt.md`, `recommendations.prompt.md`) — the reusable procedure for each output type. They are project-agnostic: the project name and documentation label are read from the "Current Repository" section below, so the same engines work in any repository.
-- Criteria definitions (`criteria/<area>.md`) — the per-area data: display name, output-file stem, question set, and comment guidance.
+- Shared engines (`answers.prompt.md`, `comment.prompt.md`, `recommendations.prompt.md`, all in `.github/prompts/areas/`) — the reusable procedure for each output type. They are project-agnostic: the project name and documentation label are read from the "Current Repository" section below, so the same engines work in any repository.
 
-There is also an optional composite engine, `full.prompt.md`, that runs the `answers`, `comment`, and `recommendations` engines for one area in that order (recommendations depends on the answers and comment files existing first). A per-area `full` wrapper (for example, `/information-architecture-full`) invokes it to produce all three output files in a single run.
+Prompt files for sections follow a similar structure, with section-level wrappers and an engine (`section-comment.prompt.md`), all in `.github/prompts/sections/`, to synthesize comments from the member areas.
 
-Above the per-area layer there is a **section-level** overall comment. The analysis groups areas into three sections (Project Documentation, Contributor Documentation, and Website and Infrastructure). The `section-comment.prompt.md` engine writes a two-to-five paragraph overall comment for one section by synthesizing that section's existing per-area comment files (it does not re-analyze the documentation), and it prepends a summary ratings table scraped from each area comment's `Rating:` line. Its data lives in `sections/<section>.md`, which lists the section's display name, slug, and member areas with the stem of each area's comment file. A per-section wrapper (for example, `/project-documentation-comment`) invokes it. Because the per-area comment files are a precondition, run the relevant `<area>-comment` prompts first. By default the output is written to `<project-slug>-<section-slug>-comment.md` (for example, `kubevirt-project-documentation-comment.md`), overridable with a `title` input.
+For areas only, there is also an optional composite engine `full.prompt.md`, that runs the `answers`, `comment`, and `recommendations` engines for one area in that order (recommendations depends on the answers and comment files existing first). A per-area `full` wrapper (for example, `/information-architecture-full`) invokes it to produce all three output files in a single run.
+
+The `section-comment.prompt.md` engine writes a two-to-five paragraph overall comment for one section by synthesizing that section's existing per-area comment files (it does not re-analyze the documentation), and it prepends a summary ratings table scraped from each area comment's `Rating:` line. Its data lives in `.github/criteria/sections/<section>.md`, which lists the section's display name, slug, and member areas with the stem of each area's comment file. A per-section wrapper (for example, `/project-documentation-comment`) invokes it. Because the per-area comment files are a precondition, run the relevant `<area>-comment` prompts first. By default the output is written to `.github/output/<project-slug>-<section-slug>-comment.md` (for example, `kubevirt-project-documentation-comment.md`), overridable with a `title` input.
 
 Each criteria area needs three wrapper files (`answers`, `comment`, `recommendations`), and the wrappers are mechanical: they reference the area name and embed the display name in the description. A `full` wrapper is optional per area.
 
-By default a prompt writes to `<project-slug>-<stem>-<type>.md` in the current directory (for example, `kubevirt-info-arch-answers.md`). Provide an optional `title` input to override the filename. To add or change questions for an area, edit only its `criteria/<area>.md` file.
+By default a prompt writes to `<project-slug>-<stem>-<type>.md` in the `.github/output` directory (for example, `kubevirt-information-architecture-answers.md`). Provide an optional `title` input to override the filename. To add or change questions for an area, edit only its `.github/criteria/areas/<area>.md` file.
 
 Output types: `answers`, `comment`, `recommendations` (plus the optional `full` composite). At the section level there is one additional output type, the section-level `comment` produced by the `section-comment` engine and its per-section wrappers.
 
-Areas:
-
-| Area | Display Name | Output File Stem | Section in analysis.md |
-|------|--------------|-----------------|------------------------|
-| beginner-friendly-issue-backlog | Beginner Friendly Issue Backlog | beginner-issue-backlog | Contributor Documentation |
-| branding-design | Branding and Design | branding-design | Website and Infrastructure |
-| case-studies | Case Studies | case-studies | Website and Infrastructure |
-| communication-methods-documented | Communication Methods Documented | communication-methods-docd | Contributor Documentation |
-| content-creation-process | Content Creation Process | content-creation-process | Project Documentation |
-| content-maintainability | Content Maintainability | content-maintainability | Project Documentation |
-| inclusive-language | Inclusive Language | inclusive-language | Project Documentation |
-| information-architecture | Information Architecture | info-arch | Project Documentation |
-| maintenance-planning | Maintenance Planning | maintenance-planning | Website and Infrastructure |
-| new-contributor-content | New Contributor Getting Started Content | new-contributor | Contributor Documentation |
-| new-user-content | New User Content | new-user | Project Documentation |
-| project-governance | Project Governance Documentation | project-governance | Contributor Documentation |
-| seo-analytics-site-search | SEO, Analytics, and Site Search | seo-analytics-search | Website and Infrastructure |
-| usability-accessibility-devices | Usability, Accessibility and Devices | usability-accessibility-devices | Website and Infrastructure |
+The analysis document has three sections: Project Documentation, Contributor Documentation, and Website & Infrastructure. Each section contains multiple criteria areas that are evaluated separately, and the results are synthesized into section-level overall comments.
 
 Sections (for the section-level overall comment):
 
 | Section | Section slug | Member areas (comment-file stems) |
 |---------|--------------|-----------------------------------|
-| Project Documentation | project-documentation | info-arch, new-user, content-maintainability, content-creation-process, inclusive-language |
+| Project Documentation | project-documentation | information-architecture, new-user, content-maintainability, content-creation-process, inclusive-language |
 | Contributor Documentation | contributor-documentation | communication-methods-docd, beginner-issue-backlog, new-contributor, project-governance |
-| Website and Infrastructure | website-infrastructure | usability-accessibility-devices, branding-design, case-studies, seo-analytics-search, maintenance-planning |
+| Website & Infrastructure | website-infrastructure | single-source-requirement, website-requirements, usability-accessibility-devices, branding-design, case-studies, seo-analytics, maintenance-planning |
+
+Areas (the Area column is the criteria filename under `.github/criteria/areas/` and the prefix of the per-area wrapper prompts):
+
+| Area | Display Name | Output File Stem | Section in analysis.md |
+|------|--------------|-----------------|------------------------|
+| beginner-issue-backlog | Beginner Friendly Issue Backlog | beginner-issue-backlog | Contributor Documentation |
+| branding-design | Branding and Design | branding-design | Website & Infrastructure |
+| case-studies | Case Studies | case-studies | Website & Infrastructure |
+| communication-methods-documented | Communication Methods Documented | communication-methods-docd | Contributor Documentation |
+| content-creation-process | Content Creation Process | content-creation-process | Project Documentation |
+| content-maintainability | Content Maintainability | content-maintainability | Project Documentation |
+| inclusive-language | Inclusive Language | inclusive-language | Project Documentation |
+| information-architecture | Information Architecture | information-architecture | Project Documentation |
+| maintenance-planning | Maintenance Planning | maintenance-planning | Website & Infrastructure |
+| new-contributor-content | New Contributor Getting Started Content | new-contributor | Contributor Documentation |
+| new-user-content | New User Content | new-user | Project Documentation |
+| project-governance-documentation | Project Governance Documentation | project-governance | Contributor Documentation |
+| seo-analytics | SEO, Analytics, and Site Search | seo-analytics | Website & Infrastructure |
+| single-source-requirement | Single-Source Requirement | single-source-requirement | Website & Infrastructure |
+| usability-accessibility-devices | Usability, Accessibility and Devices | usability-accessibility-devices | Website & Infrastructure |
+| website-requirements | Website Requirements | website-requirements | Website & Infrastructure |
 
 ### Example: invoking a predefined prompt
 
@@ -98,7 +141,7 @@ To have Copilot answer the information architecture questions, invoke the per-ar
 run /information-architecture-answers
 ```
 
-This runs the `information-architecture` questions through the shared `answers` engine and writes the result to the default file `kubevirt-info-arch-answers.md`.
+This runs the `information-architecture` questions through the shared `answers` engine and writes the result to the default file `.github/output/kubevirt-information-architecture-answers.md`.
 
 To override the output filename, pass a `title` input:
 
@@ -106,17 +149,31 @@ To override the output filename, pass a `title` input:
 run /information-architecture-answers title: my-analysis
 ```
 
-That writes the answers to `my-analysis.md` instead of the default filename. The same pattern applies to every area and output type — for example, `/inclusive-language-recommendations` or `/new-user-content-comment`.
+That writes the answers to `.github/output/my-analysis.md` instead of the default filename. The same pattern applies to every area and output type — for example, `/inclusive-language-recommendations` or `/new-user-content-comment`.
+
+## Analysis.md and Output Files Mapping
+
+Predefined prompts create Markdown files of their AI generated output. The content from these files, without the temporary H1 headings at the top, is copied into specific locations in the analysis.md file.
+
+| Output file | Location in analysis.md |
+| --- | --- |
+|`<project-slug>-project-documentation-comment.md`| **Start**: After the ratings table that follows the first paragraph that follows the "Project Documentation" H2.<br>**End**: Before the sentence "The following sections contain assessments of each element of the Project Documentation rubric." |
+|`<project-slug>-contributor-documentation-comment.md`| **Start**: After the ratings table that follows the first paragraph that follows the "Contributor Documentation" H2.<br>**End**: Before the sentence "The following sections contain assessments of each element of the Contributor Documentation rubric." |
+|`<project-slug>-website-infrastructure-comment.md`| **Start**: After the ratings table that follows the first paragraph that follows the "Website & Infrastructure" H2.<br>**End**: Before the sentence "The following sections contain assessments of each element of the Website & Infrastructure rubric." |
+| `<project-slug>-<stem>-answers.md` | **Start**: After the first paragraph that follows the H3 heading for an area, e.g. "### Information Architecture". That first paragraph should end with the sentence: "We evaluate on the following:".<br>**End**: Before the H4 "Comment" heading.|
+| `<project-slug>-<stem>-comment.md`| **Start**: After the H4 "Comment" heading.<br>**End**: Before the next H3 or H2 heading.<br>**Note**: Currently, only the Strengths and Weaknesses of the area comments are pasted into analysis.md.<br>**Note**: The rating for the area (last line in the output) is later manually copied by a writer into the area summary ratings table for the section.  |
+| `<project-slug>-<stem>-recommendations.md`| **Start**: Under the H2 headings "Project documentation recommendations", "Contributor documentation recommendations", or "Website & infrastructure recommendations" and under the H3 heading for the area.<br>**End**: Before the next H3 or H2 heading.|
+
 
 ## Current Repository
 
-Current repository: [KubeVirt](https://github.com/kubevirt/kubevirt)
+Main repository: [KubeVirt](https://github.com/kubevirt/kubevirt)
 
-Copilot analysis website and infrastructure in addition to documentation.
+Secondary repository (lab docs): [KubeVirt.github.io](https://github.com/kubevirt/kubevirt.github.io)
 
 As writers will be working in different repositories, Copilot should complete the rest of this section as shown below.
 
-Copilot shall only output Markdown files in the current directory
+Copilot shall output Markdown files from the AI-assisted analysis to the `.github/output` directory in the current directory.
 
 ### What This Repo Is
 
