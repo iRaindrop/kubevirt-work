@@ -14,13 +14,13 @@ Reusable procedure for writing an overall comment on one analysis **section** (f
 
 ## Precondition
 
-This engine reads the per-area comment files that already exist in the current directory; it does not re-analyze the documentation. Every area listed in the section definition must already have its per-area comment file (produced by that area's `comment` wrapper, for example `/information-architecture-comment`). If one or more are missing, stop and tell the user exactly which per-area comment prompts to run first. Do not write a partial section comment.
+This engine reads the per-area comment files that already exist in the `.github/output` directory; it does not re-analyze the documentation. Every area listed in the section definition must already have its per-area comment file (produced by that area's `comment` wrapper, for example `/information-architecture-comment`). If one or more are missing, stop and tell the user exactly which per-area comment prompts to run first. Do not write a partial section comment.
 
 ## Procedure
 
-1. Read the section definition at `.github/prompts/sections/<section>.md`. Use its Display name, Section slug, and the Areas table (each row gives an area's criterion label and the stem of its per-area comment file).
+1. Read the section definition at `.github/criteria/sections/<section>.md`. Use its Display name, Section slug, and the Areas table (each row gives an area's criterion label and the stem of its per-area comment file).
 2. Determine the project name and documentation label from the "Current Repository" section of the repository Copilot instructions (for example, "the KubeVirt user guide"). Derive the project slug by lowercasing the name and replacing spaces with hyphens.
-3. For each area row, read the existing per-area comment file `<project-slug>-<stem>-comment.md` from the current directory. If any are missing, follow the Precondition above and stop.
+3. For each area row, read the existing per-area comment file `<project-slug>-<stem>-comment.md` from the `.github/output` directory. If any are missing, follow the Precondition above and stop.
 4. From each area comment, extract its overall standing, its rating (the final `Rating: <n> - <label>` line), and its key strengths and highest-impact gaps or recommendations.
 5. Build a summary ratings table with one row per area, in the order listed in the section definition:
 
@@ -49,6 +49,8 @@ This engine reads the per-area comment files that already exist in the current d
 
 - Begin the file with a level-1 heading `# <Section display name> - Overall Comment`.
 - Follow the heading with the summary ratings table, then the two-to-five paragraph comment.
-- Write the result to a Markdown file in the current directory:
+- Write the result to a Markdown file in the `.github/output` directory:
   - If a title was provided, name the file `<title>.md`.
   - Otherwise name it `<project-slug>-<section-slug>-comment.md`.
+
+Output the file to the `.github/output` directory.
