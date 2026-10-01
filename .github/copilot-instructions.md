@@ -56,7 +56,7 @@ Readers of the analysis are Kubernetes subject-matter experts who want to improv
 
 ## Analysis Criteria and Predefined Prompts
 
-The KubeVirt analysis groups areas into three sections (Project Documentation, Contributor Documentation, and Website & Infrastructure). Each section contains multiple areas, and each area has its own criteria and prompts for evaluation.
+The KubeVirt analysis has three sections (Project Documentation, Contributor Documentation, and Website & Infrastructure). Each section contains multiple areas, and each area has its own criteria and prompts for evaluation.
 
 The AI assisted analysis scaffolding is organized into two types of files: criteria and prompt Markdown files. These files are organized further by `areas` and `sections` folders. These files live under `.github/criteria/areas`, `.github/criteria/sections`, `.github/prompts/areas`, and `.github/prompts/sections` respectively. Generated output lives in `.github/output`.
 
