@@ -1,5 +1,5 @@
 ---
-description: Copilot instructions for CNCF TechDocs analysis of project documentation.
+title: Copilot instructions for CNCF TechDocs analysis
 applyTo: **/*.md
 ---
 
