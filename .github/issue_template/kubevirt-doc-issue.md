@@ -1,14 +1,20 @@
+---
+title: 
+labels: [high, help wanted]
+repo: https://github.com/kubevirt/user-guide/issues
+---
+
 <!-- Make sure that you visit our User Guide at https://kubevirt.io/user-guide.
 -->
 
-**Description**:
+## Description
 A clear and concise description of what the issue is.
 
-**What you expected**:
+## What you expected
 A clear and concise description of what you expected.
 
-**URL**:
+## URL
 Provide a link to the documentation.
 
-**Additional context**:
+## Additional context
 Add any other context about the issue here.

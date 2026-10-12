@@ -76,9 +76,13 @@ The AI assisted analysis scaffolding is organized into two types of files: crite
     sections/
       section-comment.prompt.md  # Shared engine
       <section>-comment.prompt.md  # Per-section wrappers
+    issues/
+      create-issues.prompt.md    # Generates issue files from ranked recommendations
   output/
     <project-slug>-<stem>-<type>.md            # Per-area outputs
     <project-slug>-<section-slug>-comment.md   # Section-level comments
+    issues/<issue-title>.md                    # Generated issue files
+    issues-coverage.md                         # Recommendation-to-issue mapping
 ```
 
 Criteria files for an area define the per-area data: display name, output-file stem, question set, and comment guidance. The area name is the criteria filename without `.md` (for example, `.github/criteria/areas/information-architecture.md` defines the `information-architecture` area).
@@ -164,6 +168,53 @@ Predefined prompts create Markdown files of their AI generated output. The conte
 | `<project-slug>-<stem>-comment.md`| **Start**: After the H4 "Comment" heading.<br>**End**: Before the next H3 or H2 heading.<br>**Note**: Currently, only the Strengths and Weaknesses of the area comments are pasted into analysis.md.<br>**Note**: The rating for the area (last line in the output) is later manually copied by a writer into the area summary ratings table for the section.  |
 | `<project-slug>-<stem>-recommendations.md`| **Start**: Under the H2 headings "Project documentation recommendations", "Contributor documentation recommendations", or "Website & infrastructure recommendations" and under the H3 heading for the area.<br>**End**: Before the next H3 or H2 heading.|
 
+## Recommendations and Issues
+
+Currently, a writer took the recommendations from the Copilot analysis and asked Copilot to rank them. The writer created a file, `.github/input/ai-ranked-recommendations.csv`, with the following columns:
+- `Section` - Either the "Project Documentation", "Contributor documentation", or "Website & Infrastructure" section.
+- `Area` - The specific area within the section that the recommendation pertains to. The area names in the CSV are the display names used in the analysis, not the criteria area filenames.
+- `Recommendation` - The AI-written recommendation describing the action that should be taken.
+- `Suggested Priority` - The ranking priority: `1 - Urgent`, `2 - High`, or `3 - Backlog`. These priorities were only for the recommendation ranking and may be adjusted when creating issues.
+
+The priority labels used for issues are `urgent`, `high`, and `backlog`, matching the CSV ranking without its number prefix. The upload process maps them to the `kubevirt/user-guide` repository labels `priority/critical-urgent`, `priority/high`, and `priority/backlog`. The repository already has the first and last; a request has been made to add `priority/high`. Assume all three are available when writing the issue files.
+
+Every issue also gets the `help wanted` label. It exists in the repository and signals that maintainers are seeking community help; CNCF uses it to surface documentation tasks on [CLOTributor](https://clotributor.dev).
+
+Issues are a subset of the recommendations that have been identified as problems or areas needing attention. Not all recommendations are issues; some may be suggestions for improvement that do not indicate a problem. Copilot is to create the issues, including umbrella issues with sub-issues, based on the ranked recommendations. Copilot may change the priority of the issues as it sees fit. As a reference, see the umbrella issues in [CNCF TechDocs Assistance issues tracker #221](https://github.com/cncf/techdocs/issues/221).
+
+Copilot will create Markdown files of the issues with updated priorities as applicable. These files will be stored in the `.github/output/issues/` directory. A process will then upload them to the project's repository, so every file in that directory must be a complete, uploadable issue.
+
+In writing the issues, Copilot should use the following guidelines:
+- Source the issues only from the ranked recommendations CSV and the per-area recommendations files in `.github/output/analysis/`. Do not add issues from general knowledge of the KubeVirt repositories; that over-generates issues the assessment did not identify.
+- Ensure that the issues are clearly described and actionable. Use the `.github/issue_template/kubevirt-doc-issue.md` template as a guide.
+- Create umbrella issues with sub-issues of three to ten items. Use the `.github/issue_template/umbrella-issue.md` template as a guide.
+- Each issue, or sub-issue, should take about two to four hours for a technical writer, or engineer, with KubeVirt context to complete.
+- Small tasks can be consolidated into one issue where appropriate. Avoid flooding the project: aim for far fewer issues than recommendations.
+- Copilot is at liberty to create other headings and subheadings in the issues files as needed to organize the content effectively.
+- Everything outside the front matter is the issue description and must be GitHub-flavored Markdown.
+- Ensure the following front matter (metadata) is included at the top of each issue file.
+  - Create a title. It becomes the GitHub issue title.
+  - Set `labels` to the priority label (`urgent`, `high`, or `backlog`) plus `help wanted`. Labels become GitHub issue labels.
+  - Set `repo` to `https://github.com/kubevirt/user-guide/issues`.
+
+  ```yaml
+  ---
+  title: 
+  labels: [high, help wanted]
+  repo: https://github.com/kubevirt/user-guide/issues
+  ---
+  ```
+- Save the issue files to the `.github/output/issues/` directory. Create file names based on the issue title, using hyphens to separate words.
+
+### Create issues AI prompt
+
+The prompt lives in `.github/prompts/issues/create-issues.prompt.md` and is the single source of truth. Run it as a slash command from the repository root:
+
+```text
+run /create-issues
+```
+
+To re-run after coaching Copilot on scope, run the command again and add the corrections in the same message, for example `run /create-issues — split the "Getting started" umbrella into two issues; the second is more than four hours`.
 
 ## Current Repository
 
