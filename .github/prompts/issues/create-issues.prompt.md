@@ -61,7 +61,14 @@ In all issue bodies:
 
 ## Outputs
 
-1. Issue files in `.github/output/issues/`. Name each file after its title, lowercased, with hyphens between words and no punctuation, for example `add-getting-started-page.md`. Overwrite existing files with the same name.
+1. Issue files in `.github/output/issues/`. Name each file with a short slug derived from its title, following these rules:
+   - Prefix umbrella issue files with `U-`; standalone issues have no prefix.
+   - Use lowercase words separated by hyphens, no punctuation, and no more than about five words.
+   - Keep the action verb and the main subject noun; drop articles, conjunctions, and secondary clauses. Name the topic (`navigation`, `footer`, `virtctl`), not the analysis area.
+   - When the title lists several changes, use a collective noun such as `improvements` or `updates` instead of listing them.
+   - Strip punctuation from version numbers (`v1.9` becomes `v19`).
+
+   Examples: "Create a new-user getting started path" becomes `U-create-getting-started-path.md`; "Fix navigation gaps and reorganize information architecture" becomes `U-fix-navigation-gaps.md`; "Apply low-effort MkDocs and build configuration improvements" becomes `U-mkdocs-improvements.md`; "Add a user-facing troubleshooting page" becomes `add-troubleshooting-page.md`. Overwrite existing files with the same name, and delete files from a previous run that no longer have a matching issue.
 2. A coverage report at `.github/output/issues-coverage.md` (outside the issues directory so it is not uploaded as an issue). Include:
    - A table mapping every CSV recommendation to the issue file and sub-issue that covers it, or "Not an issue" with a one-sentence reason.
    - A list of priority adjustments with the original ranking, the new label, and the reason.

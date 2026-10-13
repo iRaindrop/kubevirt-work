@@ -1,9 +1,7 @@
-```yaml
 ---
 title: Copilot instructions for CNCF TechDocs analysis
 applyTo: **/*.md
 ---
-```
 
 # CNCF TechDocs Analysis Copilot Instructions
 
@@ -83,7 +81,7 @@ The AI assisted analysis scaffolding is organized into two types of files: crite
   output/
     <project-slug>-<stem>-<type>.md            # Per-area outputs
     <project-slug>-<section-slug>-comment.md   # Section-level comments
-    issues/<issue-title>.md                    # Generated issue files
+    issues/[U-]<short-slug>.md                 # Generated issue files (U- prefix = umbrella)
     issues-coverage.md                         # Recommendation-to-issue mapping
 ```
 
@@ -206,7 +204,21 @@ In writing the issues, Copilot should use the following guidelines:
   repo: https://github.com/kubevirt/user-guide/issues
   ---
   ```
-- Save the issue files to the `.github/output/issues/` directory. Create file names based on the issue title, using hyphens to separate words.
+- Save the issue files to the `.github/output/issues/` directory. Prefix the file names of umbrella issues with `U-`. Name each file with a condensed, lowercase, hyphenated version of the issue title, no more than about five words:
+  - Keep the action verb and the main subject noun; drop articles, conjunctions, and secondary clauses.
+  - Name the topic (for example, `navigation`, `footer`, `virtctl`), not the analysis area it came from.
+  - When the title lists several changes, use a collective noun such as `improvements` or `updates` instead of listing them.
+  - Strip punctuation from version numbers (`v1.9` becomes `v19`).
+
+  Examples of a slug built from a full title:
+
+  | Issue title | File name |
+  | --- | --- |
+  | Create a new-user getting started path | `U-create-getting-started-path.md` |
+  | Fix navigation gaps and reorganize information architecture | `U-fix-navigation-gaps.md` |
+  | Apply low-effort MkDocs and build configuration improvements | `U-mkdocs-improvements.md` |
+  | Document v1.9 features and add reference pages | `U-document-v19-features.md` |
+  | Add a user-facing troubleshooting page | `add-troubleshooting-page.md` |
 
 ### Create issues AI prompt
 
