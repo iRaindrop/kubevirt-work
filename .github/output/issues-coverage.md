@@ -1,171 +1,254 @@
 # Issue coverage report
 
-This report maps every recommendation in `.github/input/ai-ranked-recommendations.csv` to the issue file in `.github/output/issues/` that covers it. It is kept outside the issues directory so it is not uploaded as an issue.
+This report maps every recommendation in `.github/input/ai-ranked-recommendations.csv` to the numbered issue files in `.github/output/issues/`. It is kept outside the issues directory so it is not uploaded as an issue.
 
-## Issue files
+## Issues
 
-| File | Label | Sub-issues |
+| Issue | Title | Label | File |
+|---|---|---|---|
+| #9001 | Add a Getting Started page after Architecture | high | `9001-add-getting-started-page.md` |
+| #9002 | Rewrite Basic Use as "Your first VirtualMachine" | high | `9002-rewrite-basic-use.md` |
+| #9003 | Add a Start here link and fix the Slack link on the Welcome page | urgent | `9003-fix-welcome-page-links.md` |
+| #9004 | Restructure the Installation page around the core procedure | urgent | `9004-restructure-installation-page.md` |
+| #9005 | Create an Installing virtctl page | high | `9005-create-installing-virtctl-page.md` |
+| #9006 | Enable code copy and search features in mkdocs.yml | urgent | `9006-enable-code-copy-search.md` |
+| #9007 | Convert shell code blocks to fenced blocks | backlog | `9007-convert-shell-code-blocks.md` |
+| #9008 | Fix orphaned pages and Release Notes placement in navigation | urgent | `9008-fix-navigation-orphans.md` |
+| #9009 | Add landing pages to Compute, Network, and Storage | backlog | `9009-add-section-landing-pages.md` |
+| #9010 | Rename API-centric titles and group legacy workload pages | backlog | `9010-rename-api-page-titles.md` |
+| #9011 | Remove or archive legacy installation content | high | `9011-remove-legacy-installation-content.md` |
+| #9012 | Document the VirtualMachineBackup API | high | `9012-document-virtualmachinebackup-api.md` |
+| #9013 | Document the CrossArchitectureVirtualization gate, PortRanges, and migration compression | high | `9013-document-v19-features.md` |
+| #9014 | Create a virtctl command reference | high | `9014-create-virtctl-reference.md` |
+| #9015 | Add a feature-gate table | high | `9015-add-feature-gate-table.md` |
+| #9016 | Add a user-facing Troubleshooting page | high | `9016-add-troubleshooting-page.md` |
+| #9017 | Standardize the feature-state admonition | high | `9017-standardize-feature-state-admonition.md` |
+| #9018 | Document the content versioning model, release-notes process, and localization | high | `9018-document-versioning-model.md` |
+| #9019 | Publish versioned documentation with a version selector | high | `9019-publish-versioned-docs.md` |
+| #9020 | Expand CONTRIBUTING.md into a documentation contributor guide | high | `9020-expand-contributing-guide.md` |
+| #9021 | Add a documentation style guide | urgent | `9021-add-style-guide.md` |
+| #9022 | Add a pull request template | urgent | `9022-add-pull-request-template.md` |
+| #9023 | Add per-directory OWNERS files | high | `9023-add-owners-files.md` |
+| #9024 | Give documentation a SIG home and clarify SIG meeting mechanics | high | `9024-give-docs-sig-home.md` |
+| #9025 | Triage open pull requests and add a stale-PR policy | high | `9025-triage-open-prs.md` |
+| #9026 | Add MAINTAINERS.md and a maintainer ladder | high | `9026-add-maintainers-file.md` |
+| #9027 | Reword minimizing language and cancel terminology | high | `9027-reword-minimizing-language.md` |
+| #9028 | Add accessibility and language checks to CI | backlog | `9028-add-ci-doc-checks.md` |
+| #9029 | Fix legacy master links and the node-name example | urgent | `9029-fix-legacy-master-references.md` |
+| #9030 | Add a Community and communication page to the guide | high | `9030-add-community-page.md` |
+| #9031 | Add a Community and adoption block to the index and Contributing page | urgent | `9031-add-community-adoption-links.md` |
+| #9032 | Add repository and social links to the footer | urgent | `9032-add-footer-social-links.md` |
+| #9033 | Fix logo alt text and remove unused assets and config | urgent | `9033-fix-logo-and-unused-assets.md` |
+| #9034 | Add a project overview and resource descriptions to the Contributing page | urgent | `9034-add-contributing-overview.md` |
+| #9035 | Add where-to-ask-help and the VEP docs deadline to the Contributing page | urgent | `9035-add-help-and-vep-guidance.md` |
+| #9036 | Link filtered issue lists and explain labels on the Contributing page | urgent | `9036-link-issue-lists.md` |
+| #9037 | Add a first documentation change walkthrough to the Contributing page | high | `9037-add-first-change-walkthrough.md` |
+| #9038 | Standardize the good first issue label | urgent | `9038-standardize-good-first-issue.md` |
+| #9039 | Triage the issue backlog and publish a triage cadence | high | `9039-triage-issue-backlog.md` |
+| #9040 | Add a Governance section to the kubevirt.io Community page | high | `9040-add-governance-section.md` |
+| #9041 | Document where documentation lives | high | `9041-document-content-boundary.md` |
+| #9042 | Add an API reference entry to the guide navigation | urgent | `9042-add-api-reference-link.md` |
+| #9043 | Audit kubevirt/kubevirt docs for user-facing content | backlog | `9043-audit-kubevirt-docs.md` |
+| #9044 | Audit CDI documentation for storage pages | backlog | `9044-audit-cdi-docs.md` |
+| #9045 | Decide whether to converge the website and user guide | high | `9045-decide-converge-toolchains.md` |
+| #9046 | Bring the user guide footer into compliance | high | `9046-fix-guide-footer.md` |
+| #9047 | Fix the website footer and add community health files | urgent | `9047-fix-website-footer.md` |
+| #9048 | Fix header and link contrast and align brand colors | high | `9048-fix-contrast-and-colors.md` |
+| #9049 | Fix mobile tables and replace the Architecture diagram | urgent | `9049-fix-mobile-tables.md` |
+| #9050 | Split the Disks and Volumes and Interfaces and Networks pages | backlog | `9050-split-disks-networks-pages.md` |
+| #9051 | Split the Live Migration and Release Notes pages | backlog | `9051-split-migration-release-notes.md` |
+| #9052 | Publish a brand reference | backlog | `9052-publish-brand-reference.md` |
+| #9053 | Add an adopters page and link CNCF case studies | urgent | `9053-add-adopters-page.md` |
+| #9054 | Show adopter use cases and KubeVirt-specific vendor links | high | `9054-show-adopter-use-cases.md` |
+| #9055 | Add blog categories and tags | backlog | `9055-add-blog-categories.md` |
+| #9056 | Enable production-only analytics and a 404 report on the user guide | high | `9056-enable-guide-analytics.md` |
+| #9057 | Fix robots.txt and gate analytics on kubevirt.io | urgent | `9057-fix-robots-and-site-analytics.md` |
+| #9058 | Make guide preview builds reproducible and non-indexable | urgent | `9058-fix-guide-preview-builds.md` |
+| #9059 | Unify search across the guide and the website | high | `9059-unify-search.md` |
+| #9060 | Document site infrastructure ownership | high | `9060-document-site-infrastructure.md` |
+| #9061 | Create a new-user getting started path | urgent | `U-9061-create-getting-started-path.md` |
+| #9062 | Fix navigation gaps and reorganize information architecture | urgent | `U-9062-fix-navigation-gaps.md` |
+| #9063 | Fill feature and reference coverage gaps | high | `U-9063-fill-feature-coverage-gaps.md` |
+| #9064 | Publish versioned docs and standardize feature states | high | `U-9064-publish-versioned-docs.md` |
+| #9065 | Build a documentation contributor guide | urgent | `U-9065-build-contributor-guide.md` |
+| #9066 | Improve the Contributing page for new contributors | urgent | `U-9066-improve-contributing-page.md` |
+| #9067 | Document community channels and governance | urgent | `U-9067-document-community-channels.md` |
+| #9068 | Apply inclusive language and legacy naming updates | urgent | `U-9068-inclusive-language-updates.md` |
+| #9069 | Apply accessibility and branding improvements | urgent | `U-9069-accessibility-improvements.md` |
+| #9070 | Fix website compliance and adopter content | urgent | `U-9070-fix-website-compliance.md` |
+| #9071 | Enable analytics and fix SEO configuration | urgent | `U-9071-enable-analytics-seo.md` |
+| #9072 | Document site ownership and content boundaries | high | `U-9072-document-site-ownership.md` |
+
+## Umbrella issues
+
+| Umbrella | Label | Sub-issues |
 |---|---|---|
-| `U-create-getting-started-path.md` | urgent | 6 |
-| `U-fix-navigation-gaps.md` | urgent | 7 |
-| `U-mkdocs-improvements.md` | urgent | 4 |
-| `U-document-v19-features.md` | high | 6 |
-| `add-troubleshooting-page.md` | high | standalone |
-| `U-accessibility-improvements.md` | high | 9 |
-| `U-inclusive-language-updates.md` | high | 6 |
-| `U-build-contributor-guide.md` | urgent | 9 |
-| `U-publish-versioned-docs.md` | high | 5 |
-| `U-document-community-channels.md` | urgent | 5 |
-| `fix-footer-cncf-compliance.md` | urgent | standalone |
-| `U-fix-kubevirt-io-gaps.md` | urgent | 10 |
-| `U-enable-analytics.md` | high | 3 |
-| `U-document-site-ownership.md` | high | 7 |
+| #9061 Create a new-user getting started path | urgent | #9006, #9004, #9005, #9001, #9002, #9003, #9007 |
+| #9062 Fix navigation gaps and reorganize information architecture | urgent | #9008, #9042, #9011, #9009, #9010, #9050, #9051 |
+| #9063 Fill feature and reference coverage gaps | high | #9012, #9013, #9014, #9015, #9016 |
+| #9064 Publish versioned docs and standardize feature states | high | #9017, #9018, #9019 |
+| #9065 Build a documentation contributor guide | urgent | #9022, #9021, #9020, #9023, #9026, #9025 |
+| #9066 Improve the Contributing page for new contributors | urgent | #9038, #9034, #9036, #9035, #9037, #9039 |
+| #9067 Document community channels and governance | urgent | #9032, #9030, #9031, #9040, #9024 |
+| #9068 Apply inclusive language and legacy naming updates | urgent | #9029, #9027, #9028 |
+| #9069 Apply accessibility and branding improvements | urgent | #9033, #9049, #9048, #9052 |
+| #9070 Fix website compliance and adopter content | urgent | #9047, #9046, #9053, #9054, #9055 |
+| #9071 Enable analytics and fix SEO configuration | urgent | #9058, #9057, #9056, #9059 |
+| #9072 Document site ownership and content boundaries | high | #9041, #9060, #9045, #9043, #9044 |
+
+Standalone issues outside any umbrella: none. Each umbrella takes the highest label among its sub-issues.
 
 ## Recommendation mapping
 
-| # | Section | Area | CSV priority | Issue file | Sub-issue |
-|---|---|---|---|---|---|
-| 1 | Project Documentation | Information architecture | 2 - High | `U-create-getting-started-path.md` | Add a Getting Started page after Architecture |
-| 2 | Project Documentation | Information architecture | 2 - High | `U-create-getting-started-path.md` | Rewrite Basic Use as "Your first VirtualMachine" |
-| 3 | Project Documentation | Information architecture | 1 - Urgent | `U-fix-navigation-gaps.md` | Add the Plugins page to the navigation and delete the duplicate page |
-| 4 | Project Documentation | Information architecture | 2 - High | `U-document-v19-features.md`<br>`U-document-v19-features.md`<br>`U-document-v19-features.md` | Document the VirtualMachineBackup API<br>Document the CrossArchitectureVirtualization feature gate<br>Document masquerade PortRanges and MigrationPolicy compression |
-| 5 | Project Documentation | Information architecture | 2 - High | `U-document-v19-features.md` | Create a virtctl command reference |
-| 6 | Project Documentation | Information architecture | 2 - High | `U-document-v19-features.md` | Add a feature-gate table |
-| 7 | Project Documentation | Information architecture | 2 - High | `add-troubleshooting-page.md` | (standalone issue) |
-| 8 | Project Documentation | Information architecture | 3 - Backlog | `U-fix-navigation-gaps.md` | Add a landing page to each of the Compute, Network, and Storage sections |
-| 9 | Project Documentation | Information architecture | 3 - Backlog | `U-fix-navigation-gaps.md` | Rename API-centric page titles to user goals |
-| 10 | Project Documentation | Information architecture | 3 - Backlog | `U-fix-navigation-gaps.md` | Group legacy workload mechanisms under a Legacy heading |
-| 11 | Project Documentation | Information architecture | 2 - High | `U-fix-navigation-gaps.md` | Remove or archive legacy installation content |
-| 12 | Project Documentation | Information architecture | 1 - Urgent | `U-fix-navigation-gaps.md` | Add the Plugins page to the navigation and delete the duplicate page |
-| 13 | Project Documentation | Information architecture | 1 - Urgent | `U-fix-navigation-gaps.md` | Move Release Notes out of the middle of the main navigation |
-| 14 | Project Documentation | New user content | 2 - High | `U-create-getting-started-path.md` | Add a Getting Started page after Architecture |
-| 15 | Project Documentation | New user content | 2 - High | `U-create-getting-started-path.md` | Restructure the Installation page so the core procedure comes first |
-| 16 | Project Documentation | New user content | 1 - Urgent | `U-create-getting-started-path.md` | End the Installation page with a Next steps section |
-| 17 | Project Documentation | New user content | 2 - High | `U-create-getting-started-path.md` | Restructure the Installation page so the core procedure comes first |
-| 18 | Project Documentation | New user content | 2 - High | `U-create-getting-started-path.md` | Expand the virtctl page and rename it "Installing virtctl" |
-| 19 | Project Documentation | New user content | 2 - High | `U-create-getting-started-path.md` | Rewrite Basic Use as "Your first VirtualMachine" |
-| 20 | Project Documentation | New user content | 1 - Urgent | `U-mkdocs-improvements.md` | Enable code copy and search features in the theme |
-| 21 | Project Documentation | New user content | 3 - Backlog | `U-accessibility-improvements.md`<br>`U-accessibility-improvements.md` | Convert code blocks on the new-user path<br>Convert code blocks on the longest reference pages |
-| 22 | Project Documentation | New user content | 3 - Backlog | `U-create-getting-started-path.md` | Point newcomers at the Getting Started page from Welcome and Quickstarts |
-| 23 | Project Documentation | New user content | 1 - Urgent | `U-create-getting-started-path.md` | Point newcomers at the Getting Started page from Welcome and Quickstarts |
-| 24 | Project Documentation | Content maintainability & site mechanics | 2 - High | `U-publish-versioned-docs.md` | Document the content versioning model |
-| 25 | Project Documentation | Content maintainability & site mechanics | 2 - High | `U-publish-versioned-docs.md` | Publish versioned documentation with a version selector |
-| 26 | Project Documentation | Content maintainability & site mechanics | 2 - High | `U-document-v19-features.md` | Standardize the feature-state admonition |
-| 27 | Project Documentation | Content maintainability & site mechanics | 3 - Backlog | `U-publish-versioned-docs.md` | Document the release-notes update process |
-| 28 | Project Documentation | Content maintainability & site mechanics | 1 - Urgent | `U-mkdocs-improvements.md` | Enable code copy and search features in the theme |
-| 29 | Project Documentation | Content maintainability & site mechanics | 3 - Backlog | `U-publish-versioned-docs.md` | Add a localization statement |
-| 30 | Project Documentation | Content maintainability & site mechanics | 2 - High | `U-publish-versioned-docs.md` | Ask about a site-wide search |
-| 31 | Project Documentation | Content creation processes | 2 - High | `U-build-contributor-guide.md` | Expand CONTRIBUTING.md into a full documentation contributor guide |
-| 32 | Project Documentation | Content creation processes | 2 - High | `U-build-contributor-guide.md` | Name maintainers and route reviews to subject-matter experts |
-| 33 | Project Documentation | Content creation processes | 2 - High | `U-build-contributor-guide.md` | Write a documentation style guide |
-| 34 | Project Documentation | Content creation processes | 1 - Urgent | `U-build-contributor-guide.md` | Add a pull request template |
-| 35 | Project Documentation | Content creation processes | 2 - High | `U-build-contributor-guide.md` | Name maintainers and route reviews to subject-matter experts |
-| 36 | Project Documentation | Content creation processes | 2 - High | `U-build-contributor-guide.md` | Name maintainers and route reviews to subject-matter experts |
-| 37 | Project Documentation | Content creation processes | 1 - Urgent | `U-build-contributor-guide.md` | State the code-freeze requirement and a stale-PR policy, and triage open pull requests |
-| 38 | Project Documentation | Content creation processes | 2 - High | `U-build-contributor-guide.md` | State the code-freeze requirement and a stale-PR policy, and triage open pull requests |
-| 39 | Project Documentation | Inclusive language | 3 - Backlog | `U-inclusive-language-updates.md`<br>`U-inclusive-language-updates.md` | Reword minimizing language on the five pages with the most occurrences<br>Reword minimizing language across the remaining pages |
-| 40 | Project Documentation | Inclusive language | 1 - Urgent | `U-build-contributor-guide.md` | Write a documentation style guide |
-| 41 | Project Documentation | Inclusive language | 3 - Backlog | `U-inclusive-language-updates.md` | Add an automated check for minimizing language |
-| 42 | Project Documentation | Inclusive language | 1 - Urgent | `U-inclusive-language-updates.md` | Update legacy branch-name links and the Presets example |
-| 43 | Project Documentation | Inclusive language | 1 - Urgent | `U-inclusive-language-updates.md` | Update legacy branch-name links and the Presets example |
-| 44 | Project Documentation | Inclusive language | 2 - High | `U-inclusive-language-updates.md` | Prefer "cancel" over "abort" in Live Migration prose |
-| 45 | Project Documentation | Inclusive language | 3 - Backlog | `U-inclusive-language-updates.md` | Use tagged or permalink URLs for upstream project links |
-| 46 | Contributor documentation | Communication methods documented | 2 - High | `U-document-community-channels.md` | Add a Community and communication page to the guide |
-| 47 | Contributor documentation | Communication methods documented | 3 - Backlog | `U-document-community-channels.md` | Add a Community and communication page to the guide |
-| 48 | Contributor documentation | Communication methods documented | 1 - Urgent | `U-mkdocs-improvements.md` | Add repository and social links to every page |
-| 49 | Contributor documentation | Communication methods documented | 1 - Urgent | `U-document-community-channels.md` | Add a Community and communication page to the guide |
-| 50 | Contributor documentation | Beginner friendly issue backlog | 1 - Urgent | `U-document-community-channels.md` | Standardize on the `good first issue` label |
-| 51 | Contributor documentation | Beginner friendly issue backlog | 2 - High | `U-document-community-channels.md` | Seed and maintain a pool of beginner issues |
-| 52 | Contributor documentation | Beginner friendly issue backlog | 2 - High | `U-document-community-channels.md` | Triage the open issue backlog |
-| 53 | Contributor documentation | Beginner friendly issue backlog | 3 - Backlog | `U-document-community-channels.md` | Standardize on the `good first issue` label |
-| 54 | Contributor documentation | Beginner friendly issue backlog | 3 - Backlog | `U-document-community-channels.md` | Triage the open issue backlog |
-| 55 | Contributor documentation | Beginner friendly issue backlog | 3 - Backlog | `U-document-community-channels.md` | Seed and maintain a pool of beginner issues |
-| 56 | Contributor documentation | Beginner friendly issue backlog | 2 - High | `U-document-community-channels.md` | Publish a documentation triage cadence and give documentation a SIG home |
-| 57 | Contributor documentation | New contributor getting started content | 2 - High | `U-build-contributor-guide.md` | Add a "Making your first documentation change" walkthrough |
-| 58 | Contributor documentation | New contributor getting started content | 2 - High | `U-build-contributor-guide.md` | Add "Where to ask for help" and direct links to beginner issues |
-| 59 | Contributor documentation | New contributor getting started content | 1 - Urgent | `U-build-contributor-guide.md` | Add "Where to ask for help" and direct links to beginner issues |
-| 60 | Contributor documentation | New contributor getting started content | 1 - Urgent | `U-build-contributor-guide.md` | Add "Where to ask for help" and direct links to beginner issues |
-| 61 | Contributor documentation | New contributor getting started content | 3 - Backlog | `U-build-contributor-guide.md` | Add a "Contributing to the code" subsection and document mentoring |
-| 62 | Contributor documentation | New contributor getting started content | 2 - High | `U-build-contributor-guide.md` | Add a "Contributing to the code" subsection and document mentoring |
-| 63 | Contributor documentation | Project governance documentation | 2 - High | `U-fix-kubevirt-io-gaps.md` | Add a Governance section to the Community page |
-| 64 | Contributor documentation | Project governance documentation | 1 - Urgent | `U-build-contributor-guide.md` | Explain how the project is run on the Contributing page |
-| 65 | Contributor documentation | Project governance documentation | 1 - Urgent | `U-build-contributor-guide.md` | Explain how the project is run on the Contributing page |
-| 66 | Contributor documentation | Project governance documentation | 2 - High | — | Not an issue — asks maintainers to audit SIG charters and `sigs.yaml` in `kubevirt/community`; a governance action outside the documentation scope. |
-| 67 | Website & Infrastructure | Single-source requirement | 2 - High | `U-document-site-ownership.md` | Document where documentation lives |
-| 68 | Website & Infrastructure | Single-source requirement | 3 - Backlog | `U-document-site-ownership.md` | Move user-facing content out of kubevirt/kubevirt/docs |
-| 69 | Website & Infrastructure | Single-source requirement | 3 - Backlog | `U-document-site-ownership.md` | Triage the CDI documentation the guide links to |
-| 70 | Website & Infrastructure | Single-source requirement | 2 - High | `U-document-site-ownership.md` | Record the repository and toolchain decisions |
-| 71 | Website & Infrastructure | Single-source requirement | 1 - Urgent | `U-fix-navigation-gaps.md` | Give the API reference a visible home in the user guide |
-| 72 | Website & Infrastructure | Website requirements | 2 - High | `fix-footer-cncf-compliance.md` | (standalone issue) |
-| 73 | Website & Infrastructure | Website requirements | 1 - Urgent | `U-fix-kubevirt-io-gaps.md` | Add the © symbol and the missing root repository files |
-| 74 | Website & Infrastructure | Website requirements | 3 - Backlog | `U-fix-kubevirt-io-gaps.md` | Point vendor logos at KubeVirt-specific pages |
-| 75 | Website & Infrastructure | Website requirements | 1 - Urgent | `fix-footer-cncf-compliance.md`<br>`U-fix-kubevirt-io-gaps.md` | (standalone issue, user guide)<br>Add the © symbol and the missing root repository files (website) |
-| 76 | Website & Infrastructure | Website requirements | 1 - Urgent | `U-fix-kubevirt-io-gaps.md` | Add the © symbol and the missing root repository files |
-| 77 | Website & Infrastructure | Website requirements | 3 - Backlog | `fix-footer-cncf-compliance.md`<br>`U-fix-kubevirt-io-gaps.md` | (standalone issue, user guide)<br>Add the © symbol and the missing root repository files (website) |
-| 78 | Website & Infrastructure | Usability, accessibility and devices | 2 - High | `U-accessibility-improvements.md` | Fix header and link contrast and align the brand color |
-| 79 | Website & Infrastructure | Usability, accessibility and devices | 3 - Backlog | `U-accessibility-improvements.md` | Replace the ASCII architecture diagram with an accessible diagram |
-| 80 | Website & Infrastructure | Usability, accessibility and devices | 3 - Backlog | `U-accessibility-improvements.md` | Convert code blocks on the new-user path |
-| 81 | Website & Infrastructure | Usability, accessibility and devices | 1 - Urgent | `U-accessibility-improvements.md` | Verify wide tables on mobile and add table captions |
-| 82 | Website & Infrastructure | Usability, accessibility and devices | 3 - Backlog | `U-accessibility-improvements.md`<br>`U-accessibility-improvements.md`<br>`U-accessibility-improvements.md` | Split Disks and Volumes by volume type<br>Split Interfaces and Networks and Live Migration<br>Split Release Notes by minor release |
-| 83 | Website & Infrastructure | Usability, accessibility and devices | 1 - Urgent | `U-mkdocs-improvements.md`<br>`U-accessibility-improvements.md` | Set the logo alt text and remove unused configuration and assets<br>Verify wide tables on mobile and add table captions |
-| 84 | Website & Infrastructure | Usability, accessibility and devices | 3 - Backlog | `U-accessibility-improvements.md` | Add an accessibility check to CI |
-| 85 | Website & Infrastructure | Branding and design | 3 - Backlog | `U-fix-kubevirt-io-gaps.md` | Publish a short brand reference |
-| 86 | Website & Infrastructure | Branding and design | 2 - High | `U-accessibility-improvements.md` | Fix header and link contrast and align the brand color |
-| 87 | Website & Infrastructure | Branding and design | 1 - Urgent | `U-mkdocs-improvements.md` | Add repository and social links to every page |
-| 88 | Website & Infrastructure | Branding and design | 3 - Backlog | — | Not an issue — optional logo-variant preference with minimal reader impact. |
-| 89 | Website & Infrastructure | Branding and design | 1 - Urgent | `U-mkdocs-improvements.md` | Set the logo alt text and remove unused configuration and assets |
-| 90 | Website & Infrastructure | Branding and design | 1 - Urgent | `U-mkdocs-improvements.md` | Set the logo alt text and remove unused configuration and assets |
-| 91 | Website & Infrastructure | Case studies/social proof | 1 - Urgent | `U-fix-kubevirt-io-gaps.md` | Link the existing CNCF case studies from the landing page |
-| 92 | Website & Infrastructure | Case studies/social proof | 2 - High | `U-fix-kubevirt-io-gaps.md` | Show adopter use cases on the logo wall |
-| 93 | Website & Infrastructure | Case studies/social proof | 3 - Backlog | `U-fix-kubevirt-io-gaps.md` | Create an adopters page |
-| 94 | Website & Infrastructure | Case studies/social proof | 2 - High | — | Not an issue — inviting adopters to write posts or talks is community outreach, not a documentation change. |
-| 95 | Website & Infrastructure | Case studies/social proof | 3 - Backlog | `U-fix-kubevirt-io-gaps.md` | Add blog categories beyond news and uncategorized |
-| 96 | Website & Infrastructure | Case studies/social proof | 2 - High | — | Not an issue — a publishing-cadence commitment for the blog is a process decision, not a documentation change. |
-| 97 | Website & Infrastructure | Case studies/social proof | 1 - Urgent | `U-document-community-channels.md` | Add a Community and communication page to the guide |
-| 98 | Website & Infrastructure | Case studies/social proof | 1 - Urgent | `U-document-community-channels.md` | Add a Community and communication page to the guide |
-| 99 | Website & Infrastructure | SEO, Analytics and site-local search | 2 - High | `U-enable-analytics.md` | Enable analytics on the user guide |
-| 100 | Website & Infrastructure | SEO, Analytics and site-local search | 2 - High | `U-enable-analytics.md`<br>`U-fix-kubevirt-io-gaps.md` | Load analytics only in production (user guide)<br>Fix robots.txt, gate analytics to production, and block indexing of previews (website) |
-| 101 | Website & Infrastructure | SEO, Analytics and site-local search | 1 - Urgent | `U-mkdocs-improvements.md`<br>`U-fix-kubevirt-io-gaps.md` | Make preview builds reproducible and non-indexable (user guide)<br>Fix robots.txt, gate analytics to production, and block indexing of previews (website) |
-| 102 | Website & Infrastructure | SEO, Analytics and site-local search | 1 - Urgent | `U-fix-kubevirt-io-gaps.md` | Fix robots.txt, gate analytics to production, and block indexing of previews |
-| 103 | Website & Infrastructure | SEO, Analytics and site-local search | 1 - Urgent | `U-mkdocs-improvements.md` | Make preview builds reproducible and non-indexable |
-| 104 | Website & Infrastructure | SEO, Analytics and site-local search | 3 - Backlog | `U-fix-kubevirt-io-gaps.md` | Index non-blog pages in site search and cross-link the two searches |
-| 105 | Website & Infrastructure | SEO, Analytics and site-local search | 2 - High | `U-document-site-ownership.md` | Add a Site infrastructure section to the README |
-| 106 | Website & Infrastructure | SEO, Analytics and site-local search | 3 - Backlog | `U-enable-analytics.md` | Set up a recurring 404 report and feed it into the redirects map |
-| 107 | Website & Infrastructure | Maintenance planning | 2 - High | `U-document-site-ownership.md` | Add a Site infrastructure section to the README |
-| 108 | Website & Infrastructure | Maintenance planning | 2 - High | `U-document-community-channels.md` | Publish a documentation triage cadence and give documentation a SIG home |
-| 109 | Website & Infrastructure | Maintenance planning | 3 - Backlog | `U-document-site-ownership.md` | Publish a maintainer ladder and keep OWNERS_ALIASES current |
-| 110 | Website & Infrastructure | Maintenance planning | 2 - High | — | Not an issue — recruiting reviewers is a people action; the starter tasks it depends on are covered by the beginner issue backlog issue. |
-| 111 | Website & Infrastructure | Maintenance planning | 2 - High | `U-document-site-ownership.md` | Record the repository and toolchain decisions |
-| 112 | Website & Infrastructure | Maintenance planning | 1 - Urgent | `U-mkdocs-improvements.md` | Make preview builds reproducible and non-indexable |
-| 113 | Website & Infrastructure | Maintenance planning | 2 - High | `U-document-site-ownership.md` | Add a Strict-Transport-Security header or record the gap |
-| 114 | Website & Infrastructure | Maintenance planning | 3 - Backlog | `U-document-site-ownership.md` | Publish a maintainer ladder and keep OWNERS_ALIASES current |
+| # | Section | Area | CSV priority | Issue(s) |
+|---|---|---|---|---|
+| 1 | Project Documentation | Information architecture | 2 - High | #9001 |
+| 2 | Project Documentation | Information architecture | 2 - High | #9002 |
+| 3 | Project Documentation | Information architecture | 1 - Urgent | #9008 |
+| 4 | Project Documentation | Information architecture | 2 - High | #9012, #9013 |
+| 5 | Project Documentation | Information architecture | 2 - High | #9014 |
+| 6 | Project Documentation | Information architecture | 2 - High | #9015 |
+| 7 | Project Documentation | Information architecture | 2 - High | #9016 |
+| 8 | Project Documentation | Information architecture | 3 - Backlog | #9009 |
+| 9 | Project Documentation | Information architecture | 3 - Backlog | #9010 |
+| 10 | Project Documentation | Information architecture | 3 - Backlog | #9010 |
+| 11 | Project Documentation | Information architecture | 2 - High | #9011 |
+| 12 | Project Documentation | Information architecture | 1 - Urgent | #9008 |
+| 13 | Project Documentation | Information architecture | 1 - Urgent | #9008 |
+| 14 | Project Documentation | New user content | 2 - High | #9001 |
+| 15 | Project Documentation | New user content | 2 - High | #9004 |
+| 16 | Project Documentation | New user content | 1 - Urgent | #9004 |
+| 17 | Project Documentation | New user content | 2 - High | #9004 |
+| 18 | Project Documentation | New user content | 2 - High | #9005 |
+| 19 | Project Documentation | New user content | 2 - High | #9002 |
+| 20 | Project Documentation | New user content | 1 - Urgent | #9006 |
+| 21 | Project Documentation | New user content | 3 - Backlog | #9007 |
+| 22 | Project Documentation | New user content | 3 - Backlog | #9001 |
+| 23 | Project Documentation | New user content | 1 - Urgent | #9003 |
+| 24 | Project Documentation | Content maintainability & site mechanics | 2 - High | #9018 |
+| 25 | Project Documentation | Content maintainability & site mechanics | 2 - High | #9019 |
+| 26 | Project Documentation | Content maintainability & site mechanics | 2 - High | #9017 |
+| 27 | Project Documentation | Content maintainability & site mechanics | 3 - Backlog | #9018 |
+| 28 | Project Documentation | Content maintainability & site mechanics | 1 - Urgent | #9006 |
+| 29 | Project Documentation | Content maintainability & site mechanics | 3 - Backlog | #9018 |
+| 30 | Project Documentation | Content maintainability & site mechanics | 2 - High | #9059 |
+| 31 | Project Documentation | Content creation processes | 2 - High | #9020 |
+| 32 | Project Documentation | Content creation processes | 2 - High | #9026 |
+| 33 | Project Documentation | Content creation processes | 2 - High | #9021 |
+| 34 | Project Documentation | Content creation processes | 1 - Urgent | #9022 |
+| 35 | Project Documentation | Content creation processes | 2 - High | #9023 |
+| 36 | Project Documentation | Content creation processes | 2 - High | #9024 |
+| 37 | Project Documentation | Content creation processes | 1 - Urgent | #9035 |
+| 38 | Project Documentation | Content creation processes | 2 - High | #9025 |
+| 39 | Project Documentation | Inclusive language | 3 - Backlog | #9027 |
+| 40 | Project Documentation | Inclusive language | 1 - Urgent | #9021 |
+| 41 | Project Documentation | Inclusive language | 3 - Backlog | #9028 |
+| 42 | Project Documentation | Inclusive language | 1 - Urgent | #9029 |
+| 43 | Project Documentation | Inclusive language | 1 - Urgent | #9029 |
+| 44 | Project Documentation | Inclusive language | 2 - High | #9027 |
+| 45 | Project Documentation | Inclusive language | 3 - Backlog | #9029 |
+| 46 | Contributor documentation | Communication methods documented | 2 - High | #9030 |
+| 47 | Contributor documentation | Communication methods documented | 3 - Backlog | #9030 |
+| 48 | Contributor documentation | Communication methods documented | 1 - Urgent | #9032 |
+| 49 | Contributor documentation | Communication methods documented | 1 - Urgent | #9003 |
+| 50 | Contributor documentation | Beginner friendly issue backlog | 1 - Urgent | #9038 |
+| 51 | Contributor documentation | Beginner friendly issue backlog | 2 - High | #9039 |
+| 52 | Contributor documentation | Beginner friendly issue backlog | 2 - High | #9039 |
+| 53 | Contributor documentation | Beginner friendly issue backlog | 3 - Backlog | #9036 |
+| 54 | Contributor documentation | Beginner friendly issue backlog | 3 - Backlog | #9038 |
+| 55 | Contributor documentation | Beginner friendly issue backlog | 3 - Backlog | #9039 |
+| 56 | Contributor documentation | Beginner friendly issue backlog | 2 - High | #9039 |
+| 57 | Contributor documentation | New contributor getting started content | 2 - High | #9037 |
+| 58 | Contributor documentation | New contributor getting started content | 2 - High | #9035 |
+| 59 | Contributor documentation | New contributor getting started content | 1 - Urgent | #9034 |
+| 60 | Contributor documentation | New contributor getting started content | 1 - Urgent | #9036 |
+| 61 | Contributor documentation | New contributor getting started content | 3 - Backlog | #9037 |
+| 62 | Contributor documentation | New contributor getting started content | 2 - High | #9035 |
+| 63 | Contributor documentation | Project governance documentation | 2 - High | #9040 |
+| 64 | Contributor documentation | Project governance documentation | 1 - Urgent | #9034 |
+| 65 | Contributor documentation | Project governance documentation | 1 - Urgent | #9034 |
+| 66 | Contributor documentation | Project governance documentation | 2 - High | #9024 |
+| 67 | Website & Infrastructure | Single-source requirement | 2 - High | #9041 |
+| 68 | Website & Infrastructure | Single-source requirement | 3 - Backlog | #9043 |
+| 69 | Website & Infrastructure | Single-source requirement | 3 - Backlog | #9044 |
+| 70 | Website & Infrastructure | Single-source requirement | 2 - High | #9045 |
+| 71 | Website & Infrastructure | Single-source requirement | 1 - Urgent | #9042 |
+| 72 | Website & Infrastructure | Website requirements | 2 - High | #9046 |
+| 73 | Website & Infrastructure | Website requirements | 1 - Urgent | #9047 |
+| 74 | Website & Infrastructure | Website requirements | 3 - Backlog | #9054 |
+| 75 | Website & Infrastructure | Website requirements | 1 - Urgent | #9047 |
+| 76 | Website & Infrastructure | Website requirements | 1 - Urgent | #9047 |
+| 77 | Website & Infrastructure | Website requirements | 3 - Backlog | #9047 |
+| 78 | Website & Infrastructure | Usability, accessibility and devices | 2 - High | #9048 |
+| 79 | Website & Infrastructure | Usability, accessibility and devices | 3 - Backlog | #9049 |
+| 80 | Website & Infrastructure | Usability, accessibility and devices | 3 - Backlog | #9007 |
+| 81 | Website & Infrastructure | Usability, accessibility and devices | 1 - Urgent | #9049 |
+| 82 | Website & Infrastructure | Usability, accessibility and devices | 3 - Backlog | #9050, #9051 |
+| 83 | Website & Infrastructure | Usability, accessibility and devices | 1 - Urgent | #9033, #9049 |
+| 84 | Website & Infrastructure | Usability, accessibility and devices | 3 - Backlog | #9028 |
+| 85 | Website & Infrastructure | Branding and design | 3 - Backlog | #9052 |
+| 86 | Website & Infrastructure | Branding and design | 2 - High | #9048 |
+| 87 | Website & Infrastructure | Branding and design | 1 - Urgent | #9032 |
+| 88 | Website & Infrastructure | Branding and design | 3 - Backlog | Not an issue — optional logo-variant preference with minimal reader impact. |
+| 89 | Website & Infrastructure | Branding and design | 1 - Urgent | #9033 |
+| 90 | Website & Infrastructure | Branding and design | 1 - Urgent | #9033 |
+| 91 | Website & Infrastructure | Case studies/social proof | 1 - Urgent | #9053 |
+| 92 | Website & Infrastructure | Case studies/social proof | 2 - High | #9054 |
+| 93 | Website & Infrastructure | Case studies/social proof | 3 - Backlog | #9053 |
+| 94 | Website & Infrastructure | Case studies/social proof | 2 - High | Not an issue — inviting adopters to write posts or talks is community outreach, not a documentation change. |
+| 95 | Website & Infrastructure | Case studies/social proof | 3 - Backlog | #9055 |
+| 96 | Website & Infrastructure | Case studies/social proof | 2 - High | Not an issue — a blog publishing-cadence commitment is a process decision, not a documentation change. |
+| 97 | Website & Infrastructure | Case studies/social proof | 1 - Urgent | #9031 |
+| 98 | Website & Infrastructure | Case studies/social proof | 1 - Urgent | #9031 |
+| 99 | Website & Infrastructure | SEO, Analytics and site-local search | 2 - High | #9056 |
+| 100 | Website & Infrastructure | SEO, Analytics and site-local search | 2 - High | #9056, #9057 |
+| 101 | Website & Infrastructure | SEO, Analytics and site-local search | 1 - Urgent | #9057, #9058 |
+| 102 | Website & Infrastructure | SEO, Analytics and site-local search | 1 - Urgent | #9057 |
+| 103 | Website & Infrastructure | SEO, Analytics and site-local search | 1 - Urgent | #9058 |
+| 104 | Website & Infrastructure | SEO, Analytics and site-local search | 3 - Backlog | #9059 |
+| 105 | Website & Infrastructure | SEO, Analytics and site-local search | 2 - High | #9060 |
+| 106 | Website & Infrastructure | SEO, Analytics and site-local search | 3 - Backlog | #9056 |
+| 107 | Website & Infrastructure | Maintenance planning | 2 - High | #9060 |
+| 108 | Website & Infrastructure | Maintenance planning | 2 - High | #9024 |
+| 109 | Website & Infrastructure | Maintenance planning | 3 - Backlog | #9026 |
+| 110 | Website & Infrastructure | Maintenance planning | 2 - High | Not an issue — recruiting reviewers is a people action; the starter tasks it depends on are covered by #9039. |
+| 111 | Website & Infrastructure | Maintenance planning | 2 - High | #9045 |
+| 112 | Website & Infrastructure | Maintenance planning | 1 - Urgent | #9058 |
+| 113 | Website & Infrastructure | Maintenance planning | 2 - High | #9060 |
+| 114 | Website & Infrastructure | Maintenance planning | 3 - Backlog | #9026 |
 
 ## Priority adjustments
 
-Umbrella labels follow the highest-priority sub-issue, with these exceptions:
+No issue takes a label lower than its highest-ranked recommendation. Each issue takes the highest ranking among its recommendations, so these recommendations were raised by bundling with higher-ranked work on the same pages or files:
 
-| Recommendation | CSV priority | Issue label | Reason |
+| Issue | Label | Recommendations raised (original ranking) | Reason |
 |---|---|---|---|
-| 42, 43 (legacy `master` links and node-name example) | 1 - Urgent | high (`U-inclusive-language-updates.md`) | Two small fixes in an umbrella whose remaining work is backlog-priority prose cleanup. They are the first sub-issue so they can be done immediately; split them out if the umbrella's label matters. |
-| 81, 83 (mobile table check and captions) | 1 - Urgent | high (`U-accessibility-improvements.md`) | The logo alt-text half of 83 is in the urgent configuration issue. The remaining verification and caption work is small and sits alongside the other accessibility fixes. |
-| 8, 9, 10 (landing pages, title renames, Legacy grouping) | 3 - Backlog | urgent (`U-fix-navigation-gaps.md`) | Bundled with urgent navigation fixes because they touch the same `.nav.yml` files; the sub-issues can be deferred independently. |
-| 22 (Quickstarts introduction) | 3 - Backlog | urgent (`U-create-getting-started-path.md`) | Combined with the urgent Welcome "Start here" link because both are one-paragraph edits to entry pages. |
-| 53, 54, 55 (`help wanted` guidance, `lifecycle/frozen`, issue checklist) | 3 - Backlog | urgent (`U-document-community-channels.md`) | Bundled into the label-standardization, triage, and seeding sub-issues they naturally belong to. |
-| 74, 85, 95, 104 (vendor logos, brand reference, blog categories, site search) | 3 - Backlog | urgent (`U-fix-kubevirt-io-gaps.md`) | Grouped with the urgent website compliance fixes because all land in `kubevirt/kubevirt.github.io`; these are the last four sub-issues and can be deferred. |
-| 27, 29 (release-notes process, localization) | 3 - Backlog | high (`U-publish-versioned-docs.md`) | Both are short `CONTRIBUTING.md` additions that belong next to the versioning model. |
-| 106 (404 report) | 3 - Backlog | high (`U-enable-analytics.md`) | Depends on the analytics sub-issues in the same umbrella. |
-| 68, 69, 109, 114 (content audits, maintainer ladder, OWNERS_ALIASES) | 3 - Backlog | high (`U-document-site-ownership.md`) | Grouped with the ownership and boundary documentation they implement. |
-
-## Notes for the writer
-
-- `U-fix-kubevirt-io-gaps.md` describes changes to `kubevirt/kubevirt.github.io`. Its `repo` is set to the user guide per the instructions; change it to `https://github.com/kubevirt/kubevirt.github.io/issues` if the upload should target the website repository directly.
-- Recommendations 75, 77, 100, and 101 each have a user-guide half and a website half and appear in two files.
-
+| #9001 | high | 22 (backlog) | The Quickstarts introduction links to the new Getting Started page. |
+| #9004 | urgent | 15, 17 (high) | Same page edit as the urgent "Next steps" section. |
+| #9018 | high | 27, 29 (backlog) | Short `CONTRIBUTING.md` additions that belong next to the versioning model. |
+| #9021 | urgent | 33 (high) | The style guide carries the urgent minimizing-language rule. |
+| #9026 | high | 109, 114 (backlog) | Maintainer documentation belongs with the `MAINTAINERS.md` work. |
+| #9027 | high | 39 (backlog) | Shares prose edits with the high-ranked cancel terminology question. |
+| #9029 | urgent | 45 (backlog) | Same legacy-branch link cleanup as the urgent `master` links. |
+| #9030 | high | 47 (backlog) | Meeting details belong on the same community page. |
+| #9035 | urgent | 58, 62 (high) | Same Contributing page section as the urgent VEP deadline. |
+| #9036 | urgent | 53 (backlog) | Label explanation sits beside the urgent filtered issue links. |
+| #9037 | high | 61 (backlog) | Same walkthrough section of the Contributing page. |
+| #9038 | urgent | 54 (backlog) | Same label and lifecycle policy as the urgent label consolidation. |
+| #9039 | high | 55 (backlog) | The issue checklist supports the triage cadence. |
+| #9047 | urgent | 77 (backlog) | Same footer file edits as the urgent copyright fix. |
+| #9049 | urgent | 79 (backlog) | Both fix content that fails on mobile or for screen readers. |
+| #9053 | urgent | 93 (backlog) | The adopters page is where the urgent case study links live. |
+| #9054 | high | 74 (backlog) | Same `ADOPTERS.md` data work. |
+| #9056 | high | 106 (backlog) | Depends on the analytics setup in the same issue. |
+| #9057 | urgent | 100 (high) | Same `robots.txt` and head template changes on the website. |
+| #9059 | high | 104 (backlog) | Same search index work as the high-ranked question. |
 
 ## Counts
 
 - Recommendations: 114
-- Covered by an issue: 109
-- Not an issue: 5
-- Issue files: 14 (12 umbrella, 2 standalone)
-- Sub-issues: 77
+- Recommendations turned into issues: 110
+- Recommendations skipped as not an issue: 4 (88, 94, 96, 110)
+- Standalone issue files written: 60 (9001–9060)
+- Umbrella issue files written: 12 (9061–9072)
+- Standalone issues not in an umbrella: 0

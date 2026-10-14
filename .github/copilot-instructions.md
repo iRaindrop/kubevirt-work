@@ -77,12 +77,14 @@ The AI assisted analysis scaffolding is organized into two types of files: crite
       section-comment.prompt.md  # Shared engine
       <section>-comment.prompt.md  # Per-section wrappers
     issues/
-      create-issues.prompt.md    # Generates issue files from ranked recommendations
+      create-issues.prompt.md           # Generates numbered issue files from ranked recommendations
+      create-umbrella-issues.prompt.md  # Groups issue files into umbrella issues
   output/
     <project-slug>-<stem>-<type>.md            # Per-area outputs
     <project-slug>-<section-slug>-comment.md   # Section-level comments
-    issues/[U-]<short-slug>.md                 # Generated issue files (U- prefix = umbrella)
-    issues-coverage.md                         # Recommendation-to-issue mapping
+    issues/<number>-<short-slug>.md            # Generated standalone issue files
+    issues/U-<number>-<short-slug>.md          # Generated umbrella issue files
+    issues-coverage.md                         # Issue list and recommendation-to-issue mapping
 ```
 
 Criteria files for an area define the per-area data: display name, output-file stem, question set, and comment guidance. The area name is the criteria filename without `.md` (for example, `.github/criteria/areas/information-architecture.md` defines the `information-architecture` area).
@@ -180,45 +182,63 @@ The priority labels used for issues are `urgent`, `high`, and `backlog`, matchin
 
 Every issue also gets the `help wanted` label. It exists in the repository and signals that maintainers are seeking community help; CNCF uses it to surface documentation tasks on [CLOTributor](https://clotributor.dev).
 
-Issues are a subset of the recommendations that have been identified as problems or areas needing attention. Not all recommendations are issues; some may be suggestions for improvement that do not indicate a problem. Copilot is to create the issues, including umbrella issues with sub-issues, based on the ranked recommendations. Copilot may change the priority of the issues as it sees fit. As a reference, see the umbrella issues in [CNCF TechDocs Assistance issues tracker #221](https://github.com/cncf/techdocs/issues/221).
+Issues are a subset of the recommendations that have been identified as problems or areas needing attention. Not all recommendations are issues; some may be suggestions for improvement that do not indicate a problem. Copilot is to create the issues based on the ranked recommendations, and then group them into umbrella issues. Copilot may change the priority of the issues as it sees fit. As a reference, see the umbrella issues in [CNCF TechDocs Assistance issues tracker #221](https://github.com/cncf/techdocs/issues/221), the KEDA [standalone issue example](https://github.com/kedacore/keda-docs/issues/1363), and the KEDA [umbrella issue example](https://github.com/kedacore/keda-docs/issues/1361). The KubeVirt assistance request is [cncf/techdocs#343](https://github.com/cncf/techdocs/issues/343).
 
-Copilot will create Markdown files of the issues with updated priorities as applicable. These files will be stored in the `.github/output/issues/` directory. A process will then upload them to the project's repository, so every file in that directory must be a complete, uploadable issue.
+Copilot will create Markdown files of the issues with updated priorities as applicable. These files will be stored in the `.github/output/issues/` directory. A process will then upload them to the project's repository, so every file in that directory must be a complete, uploadable issue. Issue creation runs in two passes, each with its own prompt:
+
+1. `/create-issues` writes one file per standalone issue, numbered sequentially.
+2. `/create-umbrella-issues` reads those files and writes umbrella issues that link to them.
 
 In writing the issues, Copilot should use the following guidelines:
 - Source the issues only from the ranked recommendations CSV and the per-area recommendations files in `.github/output/analysis/`. Do not add issues from general knowledge of the KubeVirt repositories; that over-generates issues the assessment did not identify.
-- Ensure that the issues are clearly described and actionable. Use the `.github/issue_template/kubevirt-doc-issue.md` template as a guide.
-- Create umbrella issues with sub-issues of three to ten items. Use the `.github/issue_template/umbrella-issue.md` template as a guide.
-- Each issue, or sub-issue, should take about two to four hours for a technical writer, or engineer, with KubeVirt context to complete.
+- Ensure that the issues are clearly described and actionable. Follow the headings of the `.github/issue_template/kubevirt-doc-issue.md` template; it is the KubeVirt team's documentation issue format.
+- Each issue should take about two to four hours for a technical writer, or engineer, with KubeVirt context to complete.
 - Small tasks can be consolidated into one issue where appropriate. Avoid flooding the project: aim for far fewer issues than recommendations.
-- Copilot is at liberty to create other headings and subheadings in the issues files as needed to organize the content effectively.
+- Umbrella issues group three to ten related issues. Follow the `.github/issue_template/umbrella-issue.md` template: an `## Umbrella Issue` overview and a `## Sub-issues` list that links to the sub-issue files. The umbrella does not contain the sub-issue content.
+- Copilot is at liberty to create subheadings in the issue files as needed to organize the content effectively, but keeps the template's top-level headings.
 - Everything outside the front matter is the issue description and must be GitHub-flavored Markdown.
 - Ensure the following front matter (metadata) is included at the top of each issue file.
-  - Create a title. It becomes the GitHub issue title.
+  - Create a title and append the simulated issue number as ` #{issue number}`. It becomes the GitHub issue title.
   - Set `labels` to the priority label (`urgent`, `high`, or `backlog`) plus `help wanted`. Labels become GitHub issue labels.
   - Set `repo` to `https://github.com/kubevirt/user-guide/issues`.
 
   ```yaml
   ---
-  title: 
+  title: Add a user-facing troubleshooting page #9007
   labels: [high, help wanted]
   repo: https://github.com/kubevirt/user-guide/issues
   ---
   ```
-- Save the issue files to the `.github/output/issues/` directory. Prefix the file names of umbrella issues with `U-`. Name each file with a condensed, lowercase, hyphenated version of the issue title, no more than about five words:
+
+#### Issue numbers
+
+Issue numbers simulate GitHub issue numbers so that files can reference each other before upload. They are five digits, start at 9001, and increment by one for each issue in the order written. Umbrella issues continue the sequence after the last standalone issue. The `## Issues` table in `.github/output/issues-coverage.md` maps each number to its title, label, and file, and is how the umbrella prompt finds the next free number.
+
+In an umbrella issue, each sub-issue is one list item whose link text is the sub-issue title and number and whose target is the sub-issue file, relative to the umbrella file:
+
+```markdown
+- [Reorganize Concepts #9938](9938-reorganize-concepts.md)
+```
+
+#### Issue file names
+
+Save the issue files to the `.github/output/issues/` directory. Name standalone issue files `{issue-number}-{condensed-issue-title}.md` and umbrella issue files `U-{issue-number}-{condensed-issue-title}.md`. The condensed title is a lowercase, hyphenated version of the issue title, no more than about five words:
   - Keep the action verb and the main subject noun; drop articles, conjunctions, and secondary clauses.
   - Name the topic (for example, `navigation`, `footer`, `virtctl`), not the analysis area it came from.
   - When the title lists several changes, use a collective noun such as `improvements` or `updates` instead of listing them.
   - Strip punctuation from version numbers (`v1.9` becomes `v19`).
 
-  Examples of a slug built from a full title:
+  Examples of a file name built from a full title:
 
   | Issue title | File name |
   | --- | --- |
-  | Create a new-user getting started path | `U-create-getting-started-path.md` |
-  | Fix navigation gaps and reorganize information architecture | `U-fix-navigation-gaps.md` |
-  | Apply low-effort MkDocs and build configuration improvements | `U-mkdocs-improvements.md` |
-  | Document v1.9 features and add reference pages | `U-document-v19-features.md` |
-  | Add a user-facing troubleshooting page | `add-troubleshooting-page.md` |
+  | Add a user-facing troubleshooting page #9007 | `9007-add-troubleshooting-page.md` |
+  | Move Release Notes out of the main navigation #9004 | `9004-move-release-notes.md` |
+  | Document the v1.9 VirtualMachineBackup API #9012 | `9012-document-v19-backup-api.md` |
+  | Create a new-user getting started path #9061 | `U-9061-create-getting-started-path.md` |
+  | Fix navigation gaps and reorganize information architecture #9062 | `U-9062-fix-navigation-gaps.md` |
+
+Previous runs are archived in subfolders of `.github/output/issues/` (for example, `prev_1/`). The prompts ignore those subfolders.
 
 ### Create issues AI prompt
 
@@ -228,7 +248,21 @@ The prompt lives in `.github/prompts/issues/create-issues.prompt.md` and is the 
 run /create-issues
 ```
 
-To re-run after coaching Copilot on scope, run the command again and add the corrections in the same message, for example `run /create-issues — split the "Getting started" umbrella into two issues; the second is more than four hours`.
+It deletes issue files from a previous run, writes the numbered standalone issue files, and writes `.github/output/issues-coverage.md` with the issue table, the recommendation-to-issue mapping, priority adjustments, and counts.
+
+To re-run after coaching Copilot on scope, run the command again and add the corrections in the same message, for example `run /create-issues — split the "Getting started" issue into two; it is more than four hours`.
+
+### Create umbrella issues AI prompt
+
+The prompt lives in `.github/prompts/issues/create-umbrella-issues.prompt.md`. Run it in a new session after `/create-issues` has finished and the writer has reviewed the standalone issues:
+
+```text
+run /create-umbrella-issues
+```
+
+It reads the standalone issue files and the `## Issues` table in `issues-coverage.md`, groups the issues into themes of three to ten, writes the `U-` umbrella files with the next free issue numbers, and appends the umbrellas to the coverage report. It does not modify standalone issue files or re-read the recommendations; if an issue needs rescoping, re-run `/create-issues` first.
+
+To adjust the grouping, run the command again with the corrections in the same message, for example `run /create-umbrella-issues — merge the analytics and site-ownership umbrellas`.
 
 ## Current Repository
 
